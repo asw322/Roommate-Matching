@@ -258,3 +258,26 @@ The **docker folder** contains a couple of helper scripts:
    Afterwards, continue to start your project in the backend directory by running:
 
    `yarn start`
+
+
+## Tooling
+How each new db table changes the project directory:
+
+backend:
+src/db/api/table.js
+src/db/models/table.js
+src/routes/table.js
+src/services/table.js
+
+frontend:
+src/actions/table/tableFormActions.js
+src/actions/table/tableListActions.js
+src/pages/CRUD/table/form/tableForm.js
+src/pages/CRUD/table/form/tableFormPage.js
+src/pages/CRUD/table/helpers/tableSelectItem.js
+src/pages/CRUD/table/helpers/tableFields.js
+src/pages/CRUD/table/table/tableFormatters.js
+src/pages/CRUD/table/table/tableTable.js
+src/reducers/table/tableFormReducers.js
+src/reducers/table/tableListReducers.js
+src/reducers/table/tableReducers.js
