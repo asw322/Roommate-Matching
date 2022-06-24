@@ -117,6 +117,42 @@ function Sidebar({ location, structure }) {
           />
 
           <SidebarLink
+            label="Locationpreference"
+            link="/admin/locationpreference"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Usersurvey"
+            link="/admin/usersurvey"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Userpreference"
+            link="/admin/userpreference"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Userquestionweight"
+            link="/admin/userquestionweight"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
             label="Documentation"
             link="/documentation"
             location={location}

@@ -34,6 +34,18 @@ import { useLayoutState } from '../../context/LayoutContext'
 import UsersFormPage from 'pages/CRUD/Users/form/UsersFormPage';
 import UsersTablePage from 'pages/CRUD/Users/table/UsersTablePage';
 
+import LocationpreferenceFormPage from 'pages/CRUD/Locationpreference/form/LocationpreferenceFormPage';
+import LocationpreferenceTablePage from 'pages/CRUD/Locationpreference/table/LocationpreferenceTablePage';
+
+import UsersurveyFormPage from 'pages/CRUD/Usersurvey/form/UsersurveyFormPage';
+import UsersurveyTablePage from 'pages/CRUD/Usersurvey/table/UsersurveyTablePage';
+
+import UserpreferenceFormPage from 'pages/CRUD/Userpreference/form/UserpreferenceFormPage';
+import UserpreferenceTablePage from 'pages/CRUD/Userpreference/table/UserpreferenceTablePage';
+
+import UserquestionweightFormPage from 'pages/CRUD/Userquestionweight/form/UserquestionweightFormPage';
+import UserquestionweightTablePage from 'pages/CRUD/Userquestionweight/table/UserquestionweightTablePage';
+
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url))
   return <span>Redirecting...</span>;
@@ -78,6 +90,22 @@ function Layout(props) {
                     <Route path={"/admin/users"} exact component={UsersTablePage} />
                     <Route path={"/admin/users/new"} exact component={UsersFormPage} />
                     <Route path={"/admin/users/:id/edit"} exact component={UsersFormPage} />
+
+                    <Route path={"/admin/locationpreference"} exact component={LocationpreferenceTablePage} />
+                    <Route path={"/admin/locationpreference/new"} exact component={LocationpreferenceFormPage} />
+                    <Route path={"/admin/locationpreference/:id/edit"} exact component={LocationpreferenceFormPage} />
+
+                    <Route path={"/admin/usersurvey"} exact component={UsersurveyTablePage} />
+                    <Route path={"/admin/usersurvey/new"} exact component={UsersurveyFormPage} />
+                    <Route path={"/admin/usersurvey/:id/edit"} exact component={UsersurveyFormPage} />
+
+                    <Route path={"/admin/userpreference"} exact component={UserpreferenceTablePage} />
+                    <Route path={"/admin/userpreference/new"} exact component={UserpreferenceFormPage} />
+                    <Route path={"/admin/userpreference/:id/edit"} exact component={UserpreferenceFormPage} />
+
+                    <Route path={"/admin/userquestionweight"} exact component={UserquestionweightTablePage} />
+                    <Route path={"/admin/userquestionweight/new"} exact component={UserquestionweightFormPage} />
+                    <Route path={"/admin/userquestionweight/:id/edit"} exact component={UserquestionweightFormPage} />
 
                 </Switch>
                 <Fab

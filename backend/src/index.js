@@ -16,6 +16,14 @@ const fileRoutes = require('./routes/file');
 
 const usersRoutes = require('./routes/users');
 
+const locationpreferenceRoutes = require('./routes/locationpreference');
+
+const usersurveyRoutes = require('./routes/usersurvey');
+
+const userpreferenceRoutes = require('./routes/userpreference');
+
+const userquestionweightRoutes = require('./routes/userquestionweight');
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -66,6 +74,14 @@ app.use('/api/auth', authRoutes);
 app.use('/api/file', fileRoutes);
 
 app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRoutes);
+
+app.use('/api/locationpreference', passport.authenticate('jwt', {session: false}), locationpreferenceRoutes);
+
+app.use('/api/usersurvey', passport.authenticate('jwt', {session: false}), usersurveyRoutes);
+
+app.use('/api/userpreference', passport.authenticate('jwt', {session: false}), userpreferenceRoutes);
+
+app.use('/api/userquestionweight', passport.authenticate('jwt', {session: false}), userquestionweightRoutes);
 
 const publicDir = path.join(
   __dirname,

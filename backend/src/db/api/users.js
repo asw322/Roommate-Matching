@@ -509,7 +509,7 @@ module.exports = class UsersDBApi {
           { ['id']: Utils.uuid(query) },
           Utils.ilike(
             'users',
-            'firstName',
+            'id',
             query,
           ),
         ],
@@ -517,15 +517,15 @@ module.exports = class UsersDBApi {
     }
 
     const records = await db.users.findAll({
-      attributes: [ 'id', 'firstName' ],
+      attributes: [ 'id', 'id' ],
       where,
       limit: limit ? Number(limit) : undefined,
-      orderBy: [['firstName', 'ASC']],
+      orderBy: [['id', 'ASC']],
     });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.firstName,
+      label: record.id,
     }));
   }
 
