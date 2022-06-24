@@ -10,7 +10,7 @@ const helpers = require('../helpers');
 
 class Auth {
   static async signup(email, password, options = {}, host) {
-    const user = await UsersDBApi.findBy({ email });
+    const user = await UsersDBApi.findBy({email});
 
     const hashedPassword = await bcrypt.hash(
       password,
@@ -19,24 +19,35 @@ class Auth {
 
     if (user) {
       if (user.authenticationUid) {
-        throw new ValidationError('auth.emailAlreadyInUse');
+        throw new ValidationError(
+          'auth.emailAlreadyInUse',
+        );
       }
 
       if (user.disabled) {
-        throw new ValidationError('auth.userDisabled');
+        throw new ValidationError(
+          'auth.userDisabled',
+        );
       }
 
-      await UsersDBApi.updatePassword(user.id, hashedPassword, options);
+      await UsersDBApi.updatePassword(
+        user.id,
+        hashedPassword,
+        options,
+      );
 
       if (EmailSender.isConfigured) {
-        await this.sendEmailAddressVerificationEmail(user.email, host);
+        await this.sendEmailAddressVerificationEmail(
+          user.email,
+          host,
+        );
       }
 
       const data = {
         user: {
           id: user.id,
-          email: user.email,
-        },
+          email: user.email
+        }
       };
 
       return helpers.jwtSign(data);
@@ -52,32 +63,41 @@ class Auth {
     );
 
     if (EmailSender.isConfigured) {
-      await this.sendEmailAddressVerificationEmail(newUser.email, host);
+      await this.sendEmailAddressVerificationEmail(
+        newUser.email,
+        host,
+      );
     }
 
     const data = {
       user: {
         id: newUser.id,
-        email: newUser.email,
-      },
+        email: newUser.email
+      }
     };
 
     return helpers.jwtSign(data);
   }
 
   static async signin(email, password, options = {}) {
-    const user = await UsersDBApi.findBy({ email });
+    const user = await UsersDBApi.findBy({email});
 
     if (!user) {
-      throw new ValidationError('auth.userNotFound');
+      throw new ValidationError(
+        'auth.userNotFound',
+      );
     }
 
     if (user.disabled) {
-      throw new ValidationError('auth.userDisabled');
+      throw new ValidationError(
+        'auth.userDisabled',
+      );
     }
 
     if (!user.password) {
-      throw new ValidationError('auth.wrongPassword');
+      throw new ValidationError(
+        'auth.wrongPassword',
+      );
     }
 
     if (!EmailSender.isConfigured) {
@@ -85,26 +105,36 @@ class Auth {
     }
 
     if (!user.emailVerified) {
-      throw new ValidationError('auth.userNotVerified');
+      throw new ValidationError(
+        'auth.userNotVerified',
+      );
     }
 
-    const passwordsMatch = await bcrypt.compare(password, user.password);
+    const passwordsMatch = await bcrypt.compare(
+      password,
+      user.password,
+    );
 
     if (!passwordsMatch) {
-      throw new ValidationError('auth.wrongPassword');
+      throw new ValidationError(
+        'auth.wrongPassword',
+      );
     }
 
     const data = {
       user: {
         id: user.id,
-        email: user.email,
-      },
+        email: user.email
+      }
     };
 
     return helpers.jwtSign(data);
   }
 
-  static async sendEmailAddressVerificationEmail(email, host) {
+  static async sendEmailAddressVerificationEmail(
+    email,
+    host,
+  ) {
     if (!EmailSender.isConfigured) {
       throw new Error(
         `Email provider is not configured. Please configure it at backend/config/<environment>.json.`,
@@ -113,11 +143,15 @@ class Auth {
 
     let link;
     try {
-      const token = await UsersDBApi.generateEmailVerificationToken(email);
+      const token = await UsersDBApi.generateEmailVerificationToken(
+        email,
+      );
       link = `${host}/verify-email?token=${token}`;
     } catch (error) {
       console.error(error);
-      throw new ValidationError('auth.emailAddressVerificationEmail.error');
+      throw new ValidationError(
+        'auth.emailAddressVerificationEmail.error',
+      );
     }
 
     const emailAddressVerificationEmail = new EmailAddressVerificationEmail(
@@ -125,7 +159,9 @@ class Auth {
       link,
     );
 
-    return new EmailSender(emailAddressVerificationEmail).send();
+    return new EmailSender(
+      emailAddressVerificationEmail,
+    ).send();
   }
 
   static async sendPasswordResetEmail(email, type = 'register', host) {
@@ -138,26 +174,39 @@ class Auth {
     let link;
 
     try {
-      const token = await UsersDBApi.generatePasswordResetToken(email);
+      const token = await UsersDBApi.generatePasswordResetToken(
+        email,
+      );
       link = `${host}#/password-reset?token=${token}`;
     } catch (error) {
       console.error(error);
-      throw new ValidationError('auth.passwordReset.error');
+      throw new ValidationError(
+        'auth.passwordReset.error',
+      );
     }
 
     let passwordResetEmail;
     if (type === 'register') {
-      passwordResetEmail = new PasswordResetEmail(email, link);
+      passwordResetEmail = new PasswordResetEmail(
+        email,
+        link,
+      );
     }
     if (type === 'invitation') {
-      passwordResetEmail = new InvitationEmail(email, link);
+      passwordResetEmail = new InvitationEmail(
+        email,
+        link,
+      );
     }
 
     return new EmailSender(passwordResetEmail).send();
   }
 
   static async verifyEmail(token, options = {}) {
-    const user = await UsersDBApi.findByEmailVerificationToken(token, options);
+    const user = await UsersDBApi.findByEmailVerificationToken(
+      token,
+      options,
+    );
 
     if (!user) {
       throw new ValidationError(
@@ -165,7 +214,10 @@ class Auth {
       );
     }
 
-    return UsersDBApi.markEmailVerified(user.id, options);
+    return UsersDBApi.markEmailVerified(
+      user.id,
+      options,
+    );
   }
 
   static async passwordUpdate(currentPassword, newPassword, options) {
@@ -180,7 +232,9 @@ class Auth {
     );
 
     if (!currentPasswordMatch) {
-      throw new ValidationError('auth.wrongPassword');
+      throw new ValidationError(
+        'auth.wrongPassword'
+      )
     }
 
     const newPasswordMatch = await bcrypt.compare(
@@ -189,7 +243,9 @@ class Auth {
     );
 
     if (newPasswordMatch) {
-      throw new ValidationError('auth.passwordUpdate.samePassword');
+      throw new ValidationError(
+        'auth.passwordUpdate.samePassword'
+      )
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -197,14 +253,27 @@ class Auth {
       config.bcrypt.saltRounds,
     );
 
-    return UsersDBApi.updatePassword(currentUser.id, hashedPassword, options);
+    return UsersDBApi.updatePassword(
+      currentUser.id,
+      hashedPassword,
+      options,
+    );
   }
 
-  static async passwordReset(token, password, options = {}) {
-    const user = await UsersDBApi.findByPasswordResetToken(token, options);
+  static async passwordReset(
+    token,
+    password,
+    options = {},
+  ) {
+    const user = await UsersDBApi.findByPasswordResetToken(
+      token,
+      options,
+    );
 
     if (!user) {
-      throw new ValidationError('auth.passwordReset.invalidToken');
+      throw new ValidationError(
+        'auth.passwordReset.invalidToken',
+      );
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -212,19 +281,31 @@ class Auth {
       config.bcrypt.saltRounds,
     );
 
-    return UsersDBApi.updatePassword(user.id, hashedPassword, options);
+    return UsersDBApi.updatePassword(
+      user.id,
+      hashedPassword,
+      options,
+    );
   }
 
   static async updateProfile(data, currentUser) {
     let transaction = await db.sequelize.transaction();
 
     try {
-      await UsersDBApi.findBy({ id: currentUser.id }, { transaction });
+      await UsersDBApi.findBy(
+        {id: currentUser.id},
+        {transaction},
+      );
 
-      await UsersDBApi.update(currentUser.id, data, {
-        currentUser,
-        transaction,
-      });
+      await UsersDBApi.update(
+        currentUser.id,
+        data,
+        {
+          currentUser,
+          transaction
+        },
+      );
+
 
       await transaction.commit();
     } catch (error) {
