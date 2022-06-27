@@ -75,5 +75,55 @@ module.exports = class UserpreferenceService {
       throw error;
     }
   }
+
+
+  static async getUserPreferences(id) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      let userpreference = await UserpreferenceDBApi.findBy({id}, {transaction}, );
+
+      if (!userpreference) {
+        throw new ValidationError('userpreferenceNotFound', );
+      }
+
+      await transaction.commit();
+      return userpreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+
+
+  static async getAllOtherUserPreferences(id) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      let allotheruserpreference = await UserpreferenceDBApi.findAllOtherBasedOnId({id}, {transaction}, )
+
+      if(!allotheruserpreference) {
+        throw new ValidationError('allotheruserpreference', );
+      }
+
+      await transaction.commit();
+      return allotheruserpreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+  
+
+  static async getAllOtherUserPreferencesInLocation(id, userLocationPreferences) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      // TODO: complete this
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
 };
 

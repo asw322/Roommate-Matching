@@ -281,3 +281,5 @@ src/pages/CRUD/table/table/tableTable.js
 src/reducers/table/tableFormReducers.js
 src/reducers/table/tableListReducers.js
 src/reducers/table/tableReducers.js
+
+psql -U postgres -d db_roommate_matching;

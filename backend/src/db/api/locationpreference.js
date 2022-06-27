@@ -10,26 +10,20 @@ const Op = Sequelize.Op;
 module.exports = class LocationpreferenceDBApi {
 
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const locationpreference = await db.locationpreference.create(
-  {
-  id: data.id || undefined,
+    const locationpreference = await db.locationpreference.create({
+      id: data.id || undefined,
+      city: data.city || null,
+      importHash: data.importHash || null,
+      createdById: currentUser.id,
+      updatedById: currentUser.id,
+    },
+    { transaction },
+    );
 
-    city: data.city
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return locationpreference;
+    return locationpreference;
   }
 
   static async update(id, data, options) {

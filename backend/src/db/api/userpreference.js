@@ -195,5 +195,21 @@ module.exports = class UserpreferenceDBApi {
     }));
   }
 
+  static async findAllOtherBasedOnId(id, options) {
+    const transaction = (options && options.transaction) || undefined;
+    
+    let userpreference = await db.userpreference.findAll(
+      {
+        where: {
+          id: {
+            [Op.ne]: id
+          }
+        }
+      },
+      { transaction }, 
+    );
+    
+    return userpreference;
+  }
 };
 
