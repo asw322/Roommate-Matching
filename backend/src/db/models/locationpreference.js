@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const locationpreference = sequelize.define(
     'locationpreference',
     {
@@ -14,9 +14,8 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-city: {
+      city: {
         type: DataTypes.TEXT,
-
       },
 
       importHash: {
@@ -33,7 +32,6 @@ city: {
   );
 
   locationpreference.associate = (db) => {
-
     db.locationpreference.belongsTo(db.users, {
       as: 'createdBy',
     });
@@ -45,4 +43,3 @@ city: {
 
   return locationpreference;
 };
-

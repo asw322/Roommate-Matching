@@ -119,7 +119,14 @@ module.exports = class UserpreferenceService {
     const transaction = await db.sequelize.transaction();
 
     try {
-      // TODO: complete this
+      let allotheruserpreferenceinlocation = await UserpreferenceDBApi.findAllOtherBasedOnIdAndLocation({id, userLocationPreferences}, {transaction}, );
+
+      if(!allotheruserpreferenceinlocation) {
+        throw new ValidationError('allotheruserpreferenceinlocation', );
+      }
+
+      await transaction.commit();
+      return allotheruserpreferenceinlocation;
     } catch(error) {
       await transaction.rollback();
       throw error;
