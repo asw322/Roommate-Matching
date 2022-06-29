@@ -14,6 +14,67 @@ const router = express.Router();
  *        type: object
  *        properties:
 
+ *          q1:
+ *            type: integer
+ *            format: int64
+ *          q2:
+ *            type: integer
+ *            format: int64
+ *          q3:
+ *            type: integer
+ *            format: int64
+ *          q4:
+ *            type: integer
+ *            format: int64
+ *          q5:
+ *            type: integer
+ *            format: int64
+ *          q6:
+ *            type: integer
+ *            format: int64
+ *          q7:
+ *            type: integer
+ *            format: int64
+ *          q8:
+ *            type: integer
+ *            format: int64
+ *          q9:
+ *            type: integer
+ *            format: int64
+ *          q10:
+ *            type: integer
+ *            format: int64
+ *          q11:
+ *            type: integer
+ *            format: int64
+ *          q12:
+ *            type: integer
+ *            format: int64
+ *          q13:
+ *            type: integer
+ *            format: int64
+ *          q14:
+ *            type: integer
+ *            format: int64
+ *          q15:
+ *            type: integer
+ *            format: int64
+ *          q16:
+ *            type: integer
+ *            format: int64
+ *          q17:
+ *            type: integer
+ *            format: int64
+ *          q18:
+ *            type: integer
+ *            format: int64
+ *          q19:
+ *            type: integer
+ *            format: int64
+ *          q20:
+ *            type: integer
+ *            format: int64
+
  */
 
 /**
