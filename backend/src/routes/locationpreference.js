@@ -297,7 +297,7 @@ router.get(
 router.get(
   '/user/:id',
   wrapAsync(async (req, res) => {
-    const payload = await LocationpreferenceDBApi.findAll({
+    const payload = await LocationpreferenceDBApi.findBy({
       createdById: req.params.id,
     });
 

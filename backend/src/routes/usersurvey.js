@@ -264,7 +264,7 @@ router.get('/autocomplete', async (req, res) => {
 
   /**
   * @swagger
-  *  /api/usersurvey/{id}:
+  *  /api/usersurvey/user/{id}:
   *    get:
   *      security:
   *        - bearerAuth: []
@@ -299,6 +299,88 @@ router.get('/:id', wrapAsync(async (req, res) => {
   const payload = await UsersurveyDBApi.findBy(
     { id: req.params.id },
   );
+
+  res.status(200).send(payload);
+}));
+
+
+/**
+  * @swagger
+  *  /api/usersurvey/{id}:
+  *    get:
+  *      security:
+  *        - bearerAuth: []
+  *      tags: [Usersurvey]
+  *      summary: Get survey results based on user ID
+  *      description: Get survey results based on user ID
+  *      parameters:
+  *        - in: path
+  *          name: id
+  *          description: ID of User
+  *          required: true
+  *          schema:
+  *            type: string
+  *      responses:
+  *        200:
+  *          description: Selected item successfully received
+  *          content:
+  *            application/json:
+  *              schema:
+  *                $ref: "#/components/schemas/Usersurvey"
+  *        400:
+  *          description: Invalid ID supplied
+  *        401:
+  *          $ref: "#/components/responses/UnauthorizedError"
+  *        404:
+  *          description: Item not found
+  *        500:
+  *          description: Some server error
+  */
+router.get('/user/:id', wrapAsync(async (req, res) => {
+  const payload = await UsersurveyDBApi.findBy(
+    { createdById: req.params.id }, 
+  );
+
+  res.status(200).send(payload);
+}));
+
+
+/**
+  * @swagger
+  *  /api/usersurvey/allexcept/{id}:
+  *    get:
+  *      security:
+  *        - bearerAuth: []
+  *      tags: [Usersurvey]
+  *      summary: Get all other survey result besides ID
+  *      description: Get all other survey result besides ID
+  *      parameters:
+  *        - in: path
+  *          name: id
+  *          description: ID of User
+  *          required: true
+  *          schema:
+  *            type: string
+  *      responses:
+  *        200:
+  *          description: Selected item successfully received
+  *          content:
+  *            application/json:
+  *              schema:
+  *                $ref: "#/components/schemas/Usersurvey"
+  *        400:
+  *          description: Invalid ID supplied
+  *        401:
+  *          $ref: "#/components/responses/UnauthorizedError"
+  *        404:
+  *          description: Item not found
+  *        500:
+  *          description: Some server error
+  */
+router.get('/allexcept/:id', wrapAsync(async (req, res) => {
+  const payload = await UsersurveyDBApi.findAll({
+    nid: req.params.id
+  }, );
 
   res.status(200).send(payload);
 }));

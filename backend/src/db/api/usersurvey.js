@@ -305,6 +305,22 @@ module.exports = class UsersurveyDBApi {
         };
       }
 
+      if(filter.createdById) {
+        where = {
+          ...where,
+          ['createdById']: Utils.uuid(filter.id),
+        };
+      }
+
+      if(filter.nid) {
+        where = {
+          ...where,
+          ['id']: {
+            [Op.ne]: Utils.uuid(filter.nid)
+          },
+        };
+      }
+
       if (filter.q1Range) {
         const [start, end] = filter.q1Range;
 

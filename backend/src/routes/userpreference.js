@@ -321,6 +321,46 @@ router.get(
 
 /**
  * @swagger
+ *  /api/userpreference/user/{id}:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      tags: [Userpreference]
+ *      summary: Get preference results based on user ID
+ *      description: Get preference results based on user ID
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description: ID of User
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Selected item successfully received
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/Userpreference"
+ *        400:
+ *          description: Invalid ID supplied
+ *        401:
+ *          $ref: "#/components/responses/UnauthorizedError"
+ *        404:
+ *          description: Item not found
+ *        500:
+ *          description: Some server error
+ */
+router.get('/user/:id', wrapAsync(async (req, res) => {
+  const payload = await UserpreferenceDBApi.findBy(
+    {createdById: req.params.id},
+  );
+
+  res.status(200).send(payload);
+}));
+
+/**
+ * @swagger
  *  /api/userpreference/allexcept/{id}:
  *    get:
  *      security:
