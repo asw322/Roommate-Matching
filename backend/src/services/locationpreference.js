@@ -75,5 +75,24 @@ module.exports = class LocationpreferenceService {
       throw error;
     }
   }
+
+
+  static async getAllPreferredLocations(id) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      let locationpreference = await LocationpreferenceDBApi.findBy({id},{transaction}, );
+
+      if (!locationpreference) {
+        throw new ValidationError('locationpreferenceNotFound', );
+      }
+
+      await transaction.commit();
+      return locationpreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
 };
 
