@@ -72,6 +72,146 @@ const UsersurveyForm = (props) => {
   <form onSubmit={form.handleSubmit}>
     <Grid container spacing={3} direction="column">
 
+      <Grid item>
+        <InputFormItem
+          name={'q1'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q2'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q3'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q4'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q5'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q6'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q7'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q8'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q9'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q10'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q11'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q12'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q13'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q14'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q15'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q16'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q17'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q18'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q19'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q20'}
+          schema={usersurveyFields}
+        />
+      </Grid>
+
   </Grid>
   <Grid container spacing={3} mt={2}>
     <Grid item>

@@ -56,6 +56,8 @@ const UsersurveyTable = () => {
 
   const [filters, setFilters] = React.useState([
 
+          {label: 'Q 1', title: 'q1', number: 'true'},{label: 'Q 2', title: 'q2', number: 'true'},{label: 'Q 3', title: 'q3', number: 'true'},{label: 'Q 4', title: 'q4', number: 'true'},{label: 'Q 5', title: 'q5', number: 'true'},{label: 'Q 6', title: 'q6', number: 'true'},{label: 'Q 7', title: 'q7', number: 'true'},{label: 'Q 8', title: 'q8', number: 'true'},{label: 'Q 9', title: 'q9', number: 'true'},{label: 'Q 10', title: 'q10', number: 'true'},{label: 'Q 11', title: 'q11', number: 'true'},{label: 'Q 12', title: 'q12', number: 'true'},{label: 'Q 13', title: 'q13', number: 'true'},{label: 'Q 14', title: 'q14', number: 'true'},{label: 'Q 15', title: 'q15', number: 'true'},{label: 'Q 16', title: 'q16', number: 'true'},{label: 'Q 17', title: 'q17', number: 'true'},{label: 'Q 18', title: 'q18', number: 'true'},{label: 'Q 19', title: 'q19', number: 'true'},{label: 'Q 20', title: 'q20', number: 'true'},
+
   ]);
 
   const [filterItems, setFilterItems] = React.useState([]);
@@ -174,6 +176,146 @@ const UsersurveyTable = () => {
   }
 
   const columns = [
+
+      { field: "q1",
+
+        flex: 0.6,
+
+      headerName: "Q 1"
+      },
+
+      { field: "q2",
+
+        flex: 0.6,
+
+      headerName: "Q 2"
+      },
+
+      { field: "q3",
+
+        flex: 0.6,
+
+      headerName: "Q 3"
+      },
+
+      { field: "q4",
+
+        flex: 0.6,
+
+      headerName: "Q 4"
+      },
+
+      { field: "q5",
+
+        flex: 0.6,
+
+      headerName: "Q 5"
+      },
+
+      { field: "q6",
+
+        flex: 0.6,
+
+      headerName: "Q 6"
+      },
+
+      { field: "q7",
+
+        flex: 0.6,
+
+      headerName: "Q 7"
+      },
+
+      { field: "q8",
+
+        flex: 0.6,
+
+      headerName: "Q 8"
+      },
+
+      { field: "q9",
+
+        flex: 0.6,
+
+      headerName: "Q 9"
+      },
+
+      { field: "q10",
+
+        flex: 0.6,
+
+      headerName: "Q 10"
+      },
+
+      { field: "q11",
+
+        flex: 0.6,
+
+      headerName: "Q 11"
+      },
+
+      { field: "q12",
+
+        flex: 0.6,
+
+      headerName: "Q 12"
+      },
+
+      { field: "q13",
+
+        flex: 0.6,
+
+      headerName: "Q 13"
+      },
+
+      { field: "q14",
+
+        flex: 0.6,
+
+      headerName: "Q 14"
+      },
+
+      { field: "q15",
+
+        flex: 0.6,
+
+      headerName: "Q 15"
+      },
+
+      { field: "q16",
+
+        flex: 0.6,
+
+      headerName: "Q 16"
+      },
+
+      { field: "q17",
+
+        flex: 0.6,
+
+      headerName: "Q 17"
+      },
+
+      { field: "q18",
+
+        flex: 0.6,
+
+      headerName: "Q 18"
+      },
+
+      { field: "q19",
+
+        flex: 0.6,
+
+      headerName: "Q 19"
+      },
+
+      { field: "q20",
+
+        flex: 0.6,
+
+      headerName: "Q 20"
+      },
 
       {
         field: 'id',
