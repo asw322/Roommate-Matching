@@ -72,6 +72,146 @@ const UserquestionweightForm = (props) => {
   <form onSubmit={form.handleSubmit}>
     <Grid container spacing={3} direction="column">
 
+      <Grid item>
+        <InputFormItem
+          name={'q1'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q2'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q3'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q4'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q5'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q6'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q7'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q8'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q9'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q10'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q11'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q12'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q13'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q14'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q15'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q16'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q17'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q18'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q19'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'q20'}
+          schema={userquestionweightFields}
+        />
+      </Grid>
+
   </Grid>
   <Grid container spacing={3} mt={2}>
     <Grid item>
