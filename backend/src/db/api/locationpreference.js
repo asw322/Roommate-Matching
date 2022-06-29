@@ -109,6 +109,13 @@ module.exports = class LocationpreferenceDBApi {
         };
       }
 
+      if(filter.createdById) {
+        where = {
+          ...where,
+          ['createdById']: Utils.uuid(filter.createdById),
+        };
+      }
+
       if (filter.city) {
         where = {
           ...where,

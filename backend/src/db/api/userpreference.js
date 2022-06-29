@@ -103,6 +103,15 @@ module.exports = class UserpreferenceDBApi {
         };
       }
 
+      if(filter.nid) {
+        where = {
+          ...where,
+          ['id']: {
+            [Op.ne]: Utils.uuid(filter.nid)
+          },
+        };
+      }
+
       if (
         filter.active === true ||
         filter.active === 'true' ||
