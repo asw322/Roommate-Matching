@@ -80,7 +80,7 @@ module.exports = class UserquestionweightService {
     const transaction = await db.sequelize.transaction();
 
     try {
-      let userquestionweight = await UserquestionweightDBApi.findBy({id}, {transaction}, );
+      let userquestionweight = await UserquestionweightDBApi.findBy({createdById: id}, {transaction}, );
 
       if (!userquestionweight) {
         throw new ValidationError('userquestionweightNotFound', );

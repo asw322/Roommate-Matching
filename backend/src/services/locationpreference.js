@@ -81,7 +81,7 @@ module.exports = class LocationpreferenceService {
     const transaction = await db.sequelize.transaction();
 
     try {
-      let locationpreference = await LocationpreferenceDBApi.findBy({id},{transaction}, );
+      let locationpreference = await LocationpreferenceDBApi.findAll({id: id},{transaction});
 
       if (!locationpreference) {
         throw new ValidationError('locationpreferenceNotFound', );

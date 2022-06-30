@@ -881,7 +881,7 @@ module.exports = class UserpreferenceDBApi {
     let userpreference = await db.userpreference.findAll(
       {
         where: {
-          id: {
+          createdById: {
             [Op.ne]: id,
           },
         },

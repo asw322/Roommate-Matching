@@ -91,23 +91,27 @@ module.exports = class UsersService {
     }
   }
 
-  // TODO: start here
   static async calculateMatchesBasedOnUserPreferences(id) {
     const transaction = await db.sequelize.transaction();
 
     try {
       // get user location preferences
       let userLocationPreference = LocationPreferenceService.getAllPreferredLocations(id);
+
       // get user preferences
       let userPreferences = UserPreferenceService.getUserPreferences(id);
+
       // get user question weights
       let userQuestionWeight = UserQuestionWeightService.getUserQuestionWeights(id);
+
       // get all other user's weights
+      // TODO: figure out why this does not work
       let allOtherUserPreferences = UserPreferenceService.getAllOtherUserPreferences(id);
 
       // compare algorithm
 
-
+      await transaction.commit();
+      return allOtherUserPreferences;
     } catch(error) {
       await transaction.rollback();
       throw error;
