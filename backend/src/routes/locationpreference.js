@@ -3,6 +3,7 @@ const express = require('express');
 const LocationpreferenceService = require('../services/locationpreference');
 const LocationpreferenceDBApi = require('../db/api/locationpreference');
 const wrapAsync = require('../helpers').wrapAsync;
+const parseCommaStringIntoArray = require('../helpers').parseCommaStringIntoArray;
 
 const router = express.Router();
 
@@ -304,6 +305,56 @@ router.get(
     res.status(200).send(payload);
   }),
 );
+
+/**
+ * @swagger
+ *  /api/locationpreference/location/{locationArray}:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      tags: [Locationpreference]
+ *      summary: Retrieve all IDs that match any cities in locationArray
+ *      description: Retrieve all IDs that match any cities in locationArray
+ *      parameters:
+ *        - in: path
+ *          name: locationArray
+ *          description: Array of location names
+ *          required: true
+ *          schema:
+ *            type: array
+ *      responses:
+ *        200:
+ *          description: Selected item successfully received
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/Locationpreference"
+ *        400:
+ *          description: Invalid locationArray supplied
+ *        401:
+ *          $ref: "#/components/responses/UnauthorizedError"
+ *        404:
+ *          description: Item not found
+ *        500:
+ *          description: Some server error
+ */
+router.get('/location/:locationArray', wrapAsync(async (req, res) => {
+  let result = { };
+  let locationArray = parseCommaStringIntoArray(req.params.locationArray);
+
+  if(locationArray) {
+    for(let i = 0; i < locationArray.length; i++) {
+      let currLocation = locationArray[i];
+      result[currLocation] = await LocationpreferenceDBApi.findAll({
+        city: currLocation,
+      });
+    }
+  
+    res.status(200).send(result);
+  } else {
+    res.status(400).send("Invalid location parameter(s) input");
+  }
+}));
 
 router.use('/', require('../helpers').commonErrorHandler);
 

@@ -96,7 +96,7 @@ module.exports = class UsersService {
 
     try {
       // get user location preferences
-      let userLocationPreference = LocationPreferenceService.getAllPreferredLocations(id);
+      let userLocationPreference = LocationPreferenceService.getAllPreferredLocationsBasedOnId(id);
 
       // get user preferences
       let userPreferences = UserPreferenceService.getUserPreferences(id);
@@ -105,10 +105,10 @@ module.exports = class UsersService {
       let userQuestionWeight = UserQuestionWeightService.getUserQuestionWeights(id);
 
       // get all other user's weights
-      // TODO: figure out why this does not work
       let allOtherUserPreferences = UserPreferenceService.getAllOtherUserPreferences(id);
 
       // compare algorithm
+      
 
       await transaction.commit();
       return allOtherUserPreferences;

@@ -100,8 +100,9 @@ module.exports = class UserpreferenceService {
     const transaction = await db.sequelize.transaction();
 
     try {
-      let allotheruserpreference = await UserpreferenceDBApi.findAllOtherBasedOnId({createdById: id}, {transaction}, );
-      // let allotheruserpreference = await UserpreferenceDBApi.findAll({nid: id});
+      let allotheruserpreference = await UserpreferenceDBApi.findAll({
+        nid: id, 
+      });
 
       if(!allotheruserpreference) {
         throw new ValidationError('allotheruserpreference', );

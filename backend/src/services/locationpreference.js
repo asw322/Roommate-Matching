@@ -77,7 +77,7 @@ module.exports = class LocationpreferenceService {
   }
 
 
-  static async getAllPreferredLocations(id) {
+  static async getAllPreferredLocationsBasedOnId(id) {
     const transaction = await db.sequelize.transaction();
 
     try {
@@ -89,6 +89,20 @@ module.exports = class LocationpreferenceService {
 
       await transaction.commit();
       return locationpreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+
+  static async getAllIdBasedOnLocations(locationsArray) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      let id = await LocationPreferenceDBApi.findAll({cityArray: locationsArray}, {transaction}); 
+
+      await transaction.commit();
+      return id;
     } catch(error) {
       await transaction.rollback();
       throw error;
