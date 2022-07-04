@@ -81,7 +81,10 @@ module.exports = class LocationpreferenceService {
     const transaction = await db.sequelize.transaction();
 
     try {
-      let locationpreference = await LocationpreferenceDBApi.findAll({id: id},{transaction});
+      let locationpreference = await LocationpreferenceDBApi.findAll({
+        createdById: id,
+        attributes: ['city']
+      },{transaction});
 
       if (!locationpreference) {
         throw new ValidationError('locationpreferenceNotFound', );
@@ -95,18 +98,30 @@ module.exports = class LocationpreferenceService {
     }
   }
 
-  static async getAllIdBasedOnLocations(locationsArray) {
+  static async getAllIdBasedOnLocations(locationArray) {
     const transaction = await db.sequelize.transaction();
 
-    try {
-      let id = await LocationPreferenceDBApi.findAll({cityArray: locationsArray}, {transaction}); 
+    let result = { };
+    
+    if(locationArray) {
+      try {
+        for(let i = 0; i < locationArray.length; i++) {
+          let currLocation = locationArray[i].city;
+          result[currLocation] = await LocationpreferenceDBApi.findAll({
+            attributes: ['createdById'],
+            city: currLocation,
+          });
+        }
 
-      await transaction.commit();
-      return id;
-    } catch(error) {
-      await transaction.rollback();
-      throw error;
+        await transaction.commit();
+        return result;
+      } catch(error) {
+        await transaction.rollback();
+        throw error;
+      }
     }
+
+    await transaction.rollback();
   }
 };
 
