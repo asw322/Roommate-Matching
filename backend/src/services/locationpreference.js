@@ -75,5 +75,53 @@ module.exports = class LocationpreferenceService {
       throw error;
     }
   }
+
+
+  static async getAllPreferredLocationsBasedOnId(id) {
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      let locationpreference = await LocationpreferenceDBApi.findAll({
+        createdById: id,
+        attributes: ['city']
+      },{transaction});
+
+      if (!locationpreference) {
+        throw new ValidationError('locationpreferenceNotFound', );
+      }
+
+      await transaction.commit();
+      return locationpreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+
+  static async getAllIdBasedOnLocations(locationArray) {
+    const transaction = await db.sequelize.transaction();
+
+    let result = { };
+    
+    if(locationArray) {
+      try {
+        for(let i = 0; i < locationArray.length; i++) {
+          let currLocation = locationArray[i].city;
+          result[currLocation] = await LocationpreferenceDBApi.findAll({
+            attributes: ['createdById'],
+            city: currLocation,
+          });
+        }
+
+        await transaction.commit();
+        return result;
+      } catch(error) {
+        await transaction.rollback();
+        throw error;
+      }
+    }
+
+    await transaction.rollback();
+  }
 };
 

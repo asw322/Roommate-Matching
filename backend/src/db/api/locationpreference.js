@@ -10,26 +10,20 @@ const Op = Sequelize.Op;
 module.exports = class LocationpreferenceDBApi {
 
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const locationpreference = await db.locationpreference.create(
-  {
-  id: data.id || undefined,
+    const locationpreference = await db.locationpreference.create({
+      id: data.id || undefined,
+      city: data.city || null,
+      importHash: data.importHash || null,
+      createdById: currentUser.id,
+      updatedById: currentUser.id,
+    },
+    { transaction },
+    );
 
-    city: data.city
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return locationpreference;
+    return locationpreference;
   }
 
   static async update(id, data, options) {
@@ -103,15 +97,21 @@ module.exports = class LocationpreferenceDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [ ];
+    let attributes = [ ];
 
     if (filter) {
       if (filter.id) {
         where = {
           ...where,
           ['id']: Utils.uuid(filter.id),
+        };
+      }
+
+      if(filter.createdById) {
+        where = {
+          ...where,
+          ['createdById']: Utils.uuid(filter.createdById),
         };
       }
 
@@ -124,6 +124,10 @@ module.exports = class LocationpreferenceDBApi {
             filter.city,
           ),
         };
+      }
+
+      if(filter.attributes) {
+        attributes = filter.attributes;
       }
 
       if (
@@ -169,6 +173,7 @@ module.exports = class LocationpreferenceDBApi {
       {
         where,
         include,
+        attributes,
         distinct: true,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
@@ -178,11 +183,6 @@ module.exports = class LocationpreferenceDBApi {
         transaction,
       },
     );
-
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
 
     return { rows, count };
   }

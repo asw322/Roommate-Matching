@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,14 +7,113 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class UserpreferenceDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const userpreference = await db.userpreference.create(
-  {
-  id: data.id || undefined,
+    const userpreference = await db.userpreference.create(
+      {
+        id: data.id || undefined,
+
+    q1: data.q1
+    ||
+    null
+,
+
+    q2: data.q2
+    ||
+    null
+,
+
+    q3: data.q3
+    ||
+    null
+,
+
+    q4: data.q4
+    ||
+    null
+,
+
+    q5: data.q5
+    ||
+    null
+,
+
+    q6: data.q6
+    ||
+    null
+,
+
+    q7: data.q7
+    ||
+    null
+,
+
+    q8: data.q8
+    ||
+    null
+,
+
+    q9: data.q9
+    ||
+    null
+,
+
+    q10: data.q10
+    ||
+    null
+,
+
+    q11: data.q11
+    ||
+    null
+,
+
+    q12: data.q12
+    ||
+    null
+,
+
+    q13: data.q13
+    ||
+    null
+,
+
+    q14: data.q14
+    ||
+    null
+,
+
+    q15: data.q15
+    ||
+    null
+,
+
+    q16: data.q16
+    ||
+    null
+,
+
+    q17: data.q17
+    ||
+    null
+,
+
+    q18: data.q18
+    ||
+    null
+,
+
+    q19: data.q19
+    ||
+    null
+,
+
+    q20: data.q20
+    ||
+    null
+,
 
   importHash: data.importHash || null,
   createdById: currentUser.id,
@@ -24,11 +122,11 @@ module.exports = class UserpreferenceDBApi {
   { transaction },
   );
 
-  return userpreference;
+    return userpreference;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const userpreference = await db.userpreference.findByPk(id, {
@@ -38,28 +136,130 @@ module.exports = class UserpreferenceDBApi {
     await userpreference.update(
       {
 
+        q1: data.q1
+        ||
+        null
+,
+
+        q2: data.q2
+        ||
+        null
+,
+
+        q3: data.q3
+        ||
+        null
+,
+
+        q4: data.q4
+        ||
+        null
+,
+
+        q5: data.q5
+        ||
+        null
+,
+
+        q6: data.q6
+        ||
+        null
+,
+
+        q7: data.q7
+        ||
+        null
+,
+
+        q8: data.q8
+        ||
+        null
+,
+
+        q9: data.q9
+        ||
+        null
+,
+
+        q10: data.q10
+        ||
+        null
+,
+
+        q11: data.q11
+        ||
+        null
+,
+
+        q12: data.q12
+        ||
+        null
+,
+
+        q13: data.q13
+        ||
+        null
+,
+
+        q14: data.q14
+        ||
+        null
+,
+
+        q15: data.q15
+        ||
+        null
+,
+
+        q16: data.q16
+        ||
+        null
+,
+
+        q17: data.q17
+        ||
+        null
+,
+
+        q18: data.q18
+        ||
+        null
+,
+
+        q19: data.q19
+        ||
+        null
+,
+
+        q20: data.q20
+        ||
+        null
+,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return userpreference;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const userpreference = await db.userpreference.findByPk(id, options);
 
-    await userpreference.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await userpreference.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await userpreference.destroy({
-      transaction
+      transaction,
     });
 
     return userpreference;
@@ -77,7 +277,7 @@ module.exports = class UserpreferenceDBApi {
       return userpreference;
     }
 
-    const output = userpreference.get({plain: true});
+    const output = userpreference.get({ plain: true });
 
     return output;
   }
@@ -93,9 +293,7 @@ module.exports = class UserpreferenceDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -103,6 +301,495 @@ module.exports = class UserpreferenceDBApi {
           ...where,
           ['id']: Utils.uuid(filter.id),
         };
+      }
+
+      if(filter.nid) {
+        where = {
+          ...where,
+          ['id']: {
+            [Op.ne]: Utils.uuid(filter.nid)
+          },
+        };
+      }
+      
+      if (filter.q1Range) {
+        const [start, end] = filter.q1Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q1: {
+              ...where.q1,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q1: {
+              ...where.q1,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q2Range) {
+        const [start, end] = filter.q2Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q2: {
+              ...where.q2,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q2: {
+              ...where.q2,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q3Range) {
+        const [start, end] = filter.q3Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q3: {
+              ...where.q3,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q3: {
+              ...where.q3,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q4Range) {
+        const [start, end] = filter.q4Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q4: {
+              ...where.q4,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q4: {
+              ...where.q4,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q5Range) {
+        const [start, end] = filter.q5Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q5: {
+              ...where.q5,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q5: {
+              ...where.q5,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q6Range) {
+        const [start, end] = filter.q6Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q6: {
+              ...where.q6,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q6: {
+              ...where.q6,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q7Range) {
+        const [start, end] = filter.q7Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q7: {
+              ...where.q7,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q7: {
+              ...where.q7,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q8Range) {
+        const [start, end] = filter.q8Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q8: {
+              ...where.q8,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q8: {
+              ...where.q8,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q9Range) {
+        const [start, end] = filter.q9Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q9: {
+              ...where.q9,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q9: {
+              ...where.q9,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q10Range) {
+        const [start, end] = filter.q10Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q10: {
+              ...where.q10,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q10: {
+              ...where.q10,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q11Range) {
+        const [start, end] = filter.q11Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q11: {
+              ...where.q11,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q11: {
+              ...where.q11,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q12Range) {
+        const [start, end] = filter.q12Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q12: {
+              ...where.q12,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q12: {
+              ...where.q12,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q13Range) {
+        const [start, end] = filter.q13Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q13: {
+              ...where.q13,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q13: {
+              ...where.q13,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q14Range) {
+        const [start, end] = filter.q14Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q14: {
+              ...where.q14,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q14: {
+              ...where.q14,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q15Range) {
+        const [start, end] = filter.q15Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q15: {
+              ...where.q15,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q15: {
+              ...where.q15,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q16Range) {
+        const [start, end] = filter.q16Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q16: {
+              ...where.q16,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q16: {
+              ...where.q16,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q17Range) {
+        const [start, end] = filter.q17Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q17: {
+              ...where.q17,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q17: {
+              ...where.q17,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q18Range) {
+        const [start, end] = filter.q18Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q18: {
+              ...where.q18,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q18: {
+              ...where.q18,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q19Range) {
+        const [start, end] = filter.q19Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q19: {
+              ...where.q19,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q19: {
+              ...where.q19,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q20Range) {
+        const [start, end] = filter.q20Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q20: {
+              ...where.q20,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q20: {
+              ...where.q20,
+              [Op.lte]: end,
+            },
+          };
+        }
       }
 
       if (
@@ -113,9 +800,7 @@ module.exports = class UserpreferenceDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -144,24 +829,23 @@ module.exports = class UserpreferenceDBApi {
       }
     }
 
-    let { rows, count } = await db.userpreference.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.userpreference.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -173,17 +857,13 @@ module.exports = class UserpreferenceDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'userpreference',
-            'id',
-            query,
-          ),
+          Utils.ilike('userpreference', 'id', query),
         ],
       };
     }
 
     const records = await db.userpreference.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -195,5 +875,41 @@ module.exports = class UserpreferenceDBApi {
     }));
   }
 
-};
+  static async findAllOtherBasedOnId(id, options) {
+    const transaction = (options && options.transaction) || undefined;
 
+    let userpreference = await db.userpreference.findAll(
+      {
+        where: {
+          createdById: {
+            [Op.ne]: id,
+          },
+        },
+      },
+      { transaction },
+    );
+
+    return userpreference;
+  }
+
+  static async findAllOtherBasedOnIdAndLocation(where, options) {
+    const transaction = (options && options.transaction) || undefined;
+
+    let userpreference = await db.userpreference.findAll(
+      {
+        where: {
+          id: {
+            [Op.ne]: id, 
+          }
+        },
+        attributes: ['id'],
+        include: [
+          {model: db.locationpreference, attributes:['id']}
+        ]
+      }, 
+      { transaction }
+    );
+
+    return userpreference;
+  }
+};

@@ -281,3 +281,13 @@ src/pages/CRUD/table/table/tableTable.js
 src/reducers/table/tableFormReducers.js
 src/reducers/table/tableListReducers.js
 src/reducers/table/tableReducers.js
+
+psql -U postgres -d db_roommate_matching;
+
+to get new bearer auth token: 
+send on postman: flatlogic base app URL + /api/auth/signin/local
+body: { "email": "admin@flatlogic.com", "password": "password" }
+
+
+admin@flatlogic bearer AUTH token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTkzYmY0YjUtOWYwNy00YmQ1LTlhNDMtZTdlNDFmM2U5NmFmIiwiZW1haWwiOiJhZG1pbkBmbGF0bG9naWMuY29tIn0sImlhdCI6MTY1NjQ0OTc3NSwiZXhwIjoxNjU2NDcxMzc1fQ.-1zAyvqLAF2Z9IFGfZrAWAXYseiXf5Qe53DTSqCtFtE

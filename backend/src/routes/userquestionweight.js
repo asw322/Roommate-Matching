@@ -15,6 +15,67 @@ const router = express.Router();
  *        type: object
  *        properties:
 
+ *          q1:
+ *            type: integer
+ *            format: int64
+ *          q2:
+ *            type: integer
+ *            format: int64
+ *          q3:
+ *            type: integer
+ *            format: int64
+ *          q4:
+ *            type: integer
+ *            format: int64
+ *          q5:
+ *            type: integer
+ *            format: int64
+ *          q6:
+ *            type: integer
+ *            format: int64
+ *          q7:
+ *            type: integer
+ *            format: int64
+ *          q8:
+ *            type: integer
+ *            format: int64
+ *          q9:
+ *            type: integer
+ *            format: int64
+ *          q10:
+ *            type: integer
+ *            format: int64
+ *          q11:
+ *            type: integer
+ *            format: int64
+ *          q12:
+ *            type: integer
+ *            format: int64
+ *          q13:
+ *            type: integer
+ *            format: int64
+ *          q14:
+ *            type: integer
+ *            format: int64
+ *          q15:
+ *            type: integer
+ *            format: int64
+ *          q16:
+ *            type: integer
+ *            format: int64
+ *          q17:
+ *            type: integer
+ *            format: int64
+ *          q18:
+ *            type: integer
+ *            format: int64
+ *          q19:
+ *            type: integer
+ *            format: int64
+ *          q20:
+ *            type: integer
+ *            format: int64
+
  */
 
 /**
@@ -237,6 +298,47 @@ router.get('/autocomplete', async (req, res) => {
 router.get('/:id', wrapAsync(async (req, res) => {
   const payload = await UserquestionweightDBApi.findBy(
     { id: req.params.id },
+  );
+
+  res.status(200).send(payload);
+}));
+
+
+/**
+  * @swagger
+  *  /api/userquestionweight/user/{id}:
+  *    get:
+  *      security:
+  *        - bearerAuth: []
+  *      tags: [Userquestionweight]
+  *      summary: Get question weight results based on user ID
+  *      description: Get question weight results based on user ID
+  *      parameters:
+  *        - in: path
+  *          name: id
+  *          description: ID of User
+  *          required: true
+  *          schema:
+  *            type: string
+  *      responses:
+  *        200:
+  *          description: Selected item successfully received
+  *          content:
+  *            application/json:
+  *              schema:
+  *                $ref: "#/components/schemas/Userquestionweight"
+  *        400:
+  *          description: Invalid ID supplied
+  *        401:
+  *          $ref: "#/components/responses/UnauthorizedError"
+  *        404:
+  *          description: Item not found
+  *        500:
+  *          description: Some server error
+  */
+router.get('/user/:id', wrapAsync(async (req, res) => {
+  const payload = await UserquestionweightDBApi.findBy(
+    {createdById: req.params.id}, 
   );
 
   res.status(200).send(payload);
