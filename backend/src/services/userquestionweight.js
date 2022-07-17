@@ -75,23 +75,5 @@ module.exports = class UserquestionweightService {
       throw error;
     }
   }
-
-  static async getUserQuestionWeights(id) {
-    const transaction = await db.sequelize.transaction();
-
-    try {
-      let userquestionweight = await UserquestionweightDBApi.findBy({id}, {transaction}, );
-
-      if (!userquestionweight) {
-        throw new ValidationError('userquestionweightNotFound', );
-      }
-
-      await transaction.commit();
-      return userquestionweight;
-    } catch(error) {
-      await transaction.rollback();
-      throw error;
-    }
-  }
 };
 

@@ -1,11 +1,11 @@
 const db = require('../db/models');
-const LocationpreferenceDBApi = require('../db/api/locationpreference');
+const UsermatchesDBApi = require('../db/api/usermatches');
 
-module.exports = class LocationpreferenceService {
+module.exports = class UsermatchesService {
   static async create(data, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      await LocationpreferenceDBApi.create(
+      await UsermatchesDBApi.create(
         data,
         {
           currentUser,
@@ -22,18 +22,18 @@ module.exports = class LocationpreferenceService {
   static async update(data, id, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      let locationpreference = await LocationpreferenceDBApi.findBy(
+      let usermatches = await UsermatchesDBApi.findBy(
         {id},
         {transaction},
       );
 
-      if (!locationpreference) {
+      if (!usermatches) {
         throw new ValidationError(
-          'locationpreferenceNotFound',
+          'usermatchesNotFound',
         );
       }
 
-      await LocationpreferenceDBApi.update(
+      await UsermatchesDBApi.update(
         id,
         data,
         {
@@ -43,7 +43,7 @@ module.exports = class LocationpreferenceService {
       );
 
       await transaction.commit();
-      return locationpreference;
+      return usermatches;
 
     } catch (error) {
       await transaction.rollback();
@@ -61,7 +61,7 @@ module.exports = class LocationpreferenceService {
         );
       }
 
-      await LocationpreferenceDBApi.remove(
+      await UsermatchesDBApi.remove(
         id,
         {
           currentUser,

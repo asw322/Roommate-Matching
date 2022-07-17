@@ -24,6 +24,8 @@ const userpreferenceRoutes = require('./routes/userpreference');
 
 const userquestionweightRoutes = require('./routes/userquestionweight');
 
+const usermatchesRoutes = require('./routes/usermatches');
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -82,6 +84,8 @@ app.use('/api/usersurvey', passport.authenticate('jwt', {session: false}), users
 app.use('/api/userpreference', passport.authenticate('jwt', {session: false}), userpreferenceRoutes);
 
 app.use('/api/userquestionweight', passport.authenticate('jwt', {session: false}), userquestionweightRoutes);
+
+app.use('/api/usermatches', passport.authenticate('jwt', {session: false}), usermatchesRoutes);
 
 const publicDir = path.join(
   __dirname,

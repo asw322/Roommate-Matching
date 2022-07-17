@@ -152,9 +152,9 @@ function Sidebar({ location, structure }) {
             toggleDrawer={toggleDrawer(true)}
           />
 
-          <SidebarLink 
-            label="User Selections"
-            link="/admin/usersurvey"
+          <SidebarLink
+            label="Usermatches"
+            link="/admin/usermatches"
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
             icon={<CoreIcon />}
