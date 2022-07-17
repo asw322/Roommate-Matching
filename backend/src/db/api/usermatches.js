@@ -7,17 +7,22 @@ const Utils = require('../utils');
 const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
-module.exports = class LocationpreferenceDBApi {
+module.exports = class UsermatchesDBApi {
 
   static async create(data, options) {
   const currentUser = (options && options.currentUser) || { id: null };
   const transaction = (options && options.transaction) || undefined;
 
-  const locationpreference = await db.locationpreference.create(
+  const usermatches = await db.usermatches.create(
   {
   id: data.id || undefined,
 
-    city: data.city
+    matchedId: data.matchedId
+    ||
+    null
+,
+
+    matchedType: data.matchedType
     ||
     null
 ,
@@ -29,21 +34,26 @@ module.exports = class LocationpreferenceDBApi {
   { transaction },
   );
 
-  return locationpreference;
+  return usermatches;
   }
 
   static async update(id, data, options) {
     const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
-    const locationpreference = await db.locationpreference.findByPk(id, {
+    const usermatches = await db.usermatches.findByPk(id, {
       transaction,
     });
 
-    await locationpreference.update(
+    await usermatches.update(
       {
 
-        city: data.city
+        matchedId: data.matchedId
+        ||
+        null
+,
+
+        matchedType: data.matchedType
         ||
         null
 ,
@@ -53,41 +63,41 @@ module.exports = class LocationpreferenceDBApi {
       {transaction},
     );
 
-    return locationpreference;
+    return usermatches;
   }
 
   static async remove(id, options) {
     const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
-    const locationpreference = await db.locationpreference.findByPk(id, options);
+    const usermatches = await db.usermatches.findByPk(id, options);
 
-    await locationpreference.update({
+    await usermatches.update({
       deletedBy: currentUser.id
     }, {
       transaction,
     });
 
-    await locationpreference.destroy({
+    await usermatches.destroy({
       transaction
     });
 
-    return locationpreference;
+    return usermatches;
   }
 
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const locationpreference = await db.locationpreference.findOne(
+    const usermatches = await db.usermatches.findOne(
       { where },
       { transaction },
     );
 
-    if (!locationpreference) {
-      return locationpreference;
+    if (!usermatches) {
+      return usermatches;
     }
 
-    const output = locationpreference.get({plain: true});
+    const output = usermatches.get({plain: true});
 
     return output;
   }
@@ -103,8 +113,9 @@ module.exports = class LocationpreferenceDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [ ];
-    let attributes = [ ];
+    let include = [
+
+    ];
 
     if (filter) {
       if (filter.id) {
@@ -114,26 +125,26 @@ module.exports = class LocationpreferenceDBApi {
         };
       }
 
-      if(filter.createdById) {
-        where = {
-          ...where,
-          ['createdById']: Utils.uuid(filter.createdById),
-        };
-      }
-
-      if (filter.city) {
+      if (filter.matchedId) {
         where = {
           ...where,
           [Op.and]: Utils.ilike(
-            'locationpreference',
-            'city',
-            filter.city,
+            'usermatches',
+            'matchedId',
+            filter.matchedId,
           ),
         };
       }
 
-      if(filter.attributes) {
-        attributes = filter.attributes;
+      if (filter.matchedType) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'usermatches',
+            'matchedType',
+            filter.matchedType,
+          ),
+        };
       }
 
       if (
@@ -175,11 +186,10 @@ module.exports = class LocationpreferenceDBApi {
       }
     }
 
-    let { rows, count } = await db.locationpreference.findAndCountAll(
+    let { rows, count } = await db.usermatches.findAndCountAll(
       {
         where,
         include,
-        attributes,
         distinct: true,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
@@ -189,6 +199,11 @@ module.exports = class LocationpreferenceDBApi {
         transaction,
       },
     );
+
+//    rows = await this._fillWithRelationsAndFilesForRows(
+//      rows,
+//      options,
+//    );
 
     return { rows, count };
   }
@@ -201,7 +216,7 @@ module.exports = class LocationpreferenceDBApi {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
           Utils.ilike(
-            'locationpreference',
+            'usermatches',
             'id',
             query,
           ),
@@ -209,7 +224,7 @@ module.exports = class LocationpreferenceDBApi {
       };
     }
 
-    const records = await db.locationpreference.findAll({
+    const records = await db.usermatches.findAll({
       attributes: [ 'id', 'id' ],
       where,
       limit: limit ? Number(limit) : undefined,

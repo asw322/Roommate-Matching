@@ -1,11 +1,11 @@
 const db = require('../db/models');
-const UserquestionweightDBApi = require('../db/api/userquestionweight');
+const UsermatchesDBApi = require('../db/api/usermatches');
 
-module.exports = class UserquestionweightService {
+module.exports = class UsermatchesService {
   static async create(data, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      await UserquestionweightDBApi.create(
+      await UsermatchesDBApi.create(
         data,
         {
           currentUser,
@@ -22,18 +22,18 @@ module.exports = class UserquestionweightService {
   static async update(data, id, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      let userquestionweight = await UserquestionweightDBApi.findBy(
+      let usermatches = await UsermatchesDBApi.findBy(
         {id},
         {transaction},
       );
 
-      if (!userquestionweight) {
+      if (!usermatches) {
         throw new ValidationError(
-          'userquestionweightNotFound',
+          'usermatchesNotFound',
         );
       }
 
-      await UserquestionweightDBApi.update(
+      await UsermatchesDBApi.update(
         id,
         data,
         {
@@ -43,7 +43,7 @@ module.exports = class UserquestionweightService {
       );
 
       await transaction.commit();
-      return userquestionweight;
+      return usermatches;
 
     } catch (error) {
       await transaction.rollback();
@@ -61,7 +61,7 @@ module.exports = class UserquestionweightService {
         );
       }
 
-      await UserquestionweightDBApi.remove(
+      await UsermatchesDBApi.remove(
         id,
         {
           currentUser,
@@ -71,23 +71,6 @@ module.exports = class UserquestionweightService {
 
       await transaction.commit();
     } catch (error) {
-      await transaction.rollback();
-      throw error;
-    }
-  }
-  static async getUserQuestionWeights(id) {
-    const transaction = await db.sequelize.transaction();
-
-    try {
-      let userquestionweight = await UserquestionweightDBApi.findBy({createdById: id}, {transaction}, );
-
-      if (!userquestionweight) {
-        throw new ValidationError('userquestionweightNotFound', );
-      }
-
-      await transaction.commit();
-      return userquestionweight;
-    } catch(error) {
       await transaction.rollback();
       throw error;
     }

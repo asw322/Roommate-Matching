@@ -76,7 +76,6 @@ module.exports = class UserpreferenceService {
     }
   }
 
-
   static async getUserPreferences(id) {
     const transaction = await db.sequelize.transaction();
 

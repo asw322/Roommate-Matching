@@ -46,6 +46,9 @@ import UserpreferenceTablePage from 'pages/CRUD/Userpreference/table/Userprefere
 import UserquestionweightFormPage from 'pages/CRUD/Userquestionweight/form/UserquestionweightFormPage';
 import UserquestionweightTablePage from 'pages/CRUD/Userquestionweight/table/UserquestionweightTablePage';
 
+import UsermatchesFormPage from 'pages/CRUD/Usermatches/form/UsermatchesFormPage';
+import UsermatchesTablePage from 'pages/CRUD/Usermatches/table/UsermatchesTablePage';
+
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url))
   return <span>Redirecting...</span>;
@@ -106,6 +109,10 @@ function Layout(props) {
                     <Route path={"/admin/userquestionweight"} exact component={UserquestionweightTablePage} />
                     <Route path={"/admin/userquestionweight/new"} exact component={UserquestionweightFormPage} />
                     <Route path={"/admin/userquestionweight/:id/edit"} exact component={UserquestionweightFormPage} />
+
+                    <Route path={"/admin/usermatches"} exact component={UsermatchesTablePage} />
+                    <Route path={"/admin/usermatches/new"} exact component={UsermatchesFormPage} />
+                    <Route path={"/admin/usermatches/:id/edit"} exact component={UsermatchesFormPage} />
 
                 </Switch>
                 <Fab

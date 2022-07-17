@@ -13,6 +13,8 @@ import userpreference from 'reducers/userpreference/userpreferenceReducers';
 
 import userquestionweight from 'reducers/userquestionweight/userquestionweightReducers';
 
+import usermatches from 'reducers/usermatches/usermatchesReducers';
+
 export default (history) =>
   combineReducers({
     router: connectRouter(history),
@@ -27,6 +29,8 @@ export default (history) =>
     userpreference,
 
     userquestionweight,
+
+    usermatches,
 
   });
 

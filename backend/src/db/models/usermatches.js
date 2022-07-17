@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const moment = require('moment');
 
 module.exports = function(sequelize, DataTypes) {
-  const locationpreference = sequelize.define(
-    'locationpreference',
+  const usermatches = sequelize.define(
+    'usermatches',
     {
       id: {
         type: DataTypes.UUID,
@@ -14,7 +14,12 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-city: {
+matchedId: {
+        type: DataTypes.TEXT,
+
+      },
+
+matchedType: {
         type: DataTypes.TEXT,
 
       },
@@ -32,17 +37,17 @@ city: {
     },
   );
 
-  locationpreference.associate = (db) => {
+  usermatches.associate = (db) => {
 
-    db.locationpreference.belongsTo(db.users, {
+    db.usermatches.belongsTo(db.users, {
       as: 'createdBy',
     });
 
-    db.locationpreference.belongsTo(db.users, {
+    db.usermatches.belongsTo(db.users, {
       as: 'updatedBy',
     });
   };
 
-  return locationpreference;
+  return usermatches;
 };
 

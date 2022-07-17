@@ -1,3 +1,4 @@
+
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -7,13 +8,14 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class UserpreferenceDBApi {
-  static async create(data, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
-    const transaction = (options && options.transaction) || undefined;
 
-    const userpreference = await db.userpreference.create(
-      {
-        id: data.id || undefined,
+  static async create(data, options) {
+  const currentUser = (options && options.currentUser) || { id: null };
+  const transaction = (options && options.transaction) || undefined;
+
+  const userpreference = await db.userpreference.create(
+  {
+  id: data.id || undefined,
 
     q1: data.q1
     ||
@@ -122,11 +124,11 @@ module.exports = class UserpreferenceDBApi {
   { transaction },
   );
 
-    return userpreference;
+  return userpreference;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
+    const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
     const userpreference = await db.userpreference.findByPk(id, {
@@ -235,31 +237,29 @@ module.exports = class UserpreferenceDBApi {
         ||
         null
 ,
+
         updatedById: currentUser.id,
       },
-      { transaction },
+      {transaction},
     );
 
     return userpreference;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
+    const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
     const userpreference = await db.userpreference.findByPk(id, options);
 
-    await userpreference.update(
-      {
-        deletedBy: currentUser.id,
-      },
-      {
-        transaction,
-      },
-    );
+    await userpreference.update({
+      deletedBy: currentUser.id
+    }, {
+      transaction,
+    });
 
     await userpreference.destroy({
-      transaction,
+      transaction
     });
 
     return userpreference;
@@ -277,7 +277,7 @@ module.exports = class UserpreferenceDBApi {
       return userpreference;
     }
 
-    const output = userpreference.get({ plain: true });
+    const output = userpreference.get({plain: true});
 
     return output;
   }
@@ -293,7 +293,9 @@ module.exports = class UserpreferenceDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [];
+    let include = [
+
+    ];
 
     if (filter) {
       if (filter.id) {
@@ -800,7 +802,9 @@ module.exports = class UserpreferenceDBApi {
       ) {
         where = {
           ...where,
-          active: filter.active === true || filter.active === 'true',
+          active:
+            filter.active === true ||
+            filter.active === 'true',
         };
       }
 
@@ -829,23 +833,24 @@ module.exports = class UserpreferenceDBApi {
       }
     }
 
-    let { rows, count } = await db.userpreference.findAndCountAll({
-      where,
-      include,
-      distinct: true,
-      limit: limit ? Number(limit) : undefined,
-      offset: offset ? Number(offset) : undefined,
-      order:
-        filter.field && filter.sort
+    let { rows, count } = await db.userpreference.findAndCountAll(
+      {
+        where,
+        include,
+        distinct: true,
+        limit: limit ? Number(limit) : undefined,
+        offset: offset ? Number(offset) : undefined,
+        order: (filter.field && filter.sort)
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-      transaction,
-    });
+        transaction,
+      },
+    );
 
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
+//    rows = await this._fillWithRelationsAndFilesForRows(
+//      rows,
+//      options,
+//    );
 
     return { rows, count };
   }
@@ -857,13 +862,17 @@ module.exports = class UserpreferenceDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike('userpreference', 'id', query),
+          Utils.ilike(
+            'userpreference',
+            'id',
+            query,
+          ),
         ],
       };
     }
 
     const records = await db.userpreference.findAll({
-      attributes: ['id', 'id'],
+      attributes: [ 'id', 'id' ],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -913,3 +922,4 @@ module.exports = class UserpreferenceDBApi {
     return userpreference;
   }
 };
+

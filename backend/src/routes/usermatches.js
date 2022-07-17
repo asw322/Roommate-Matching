@@ -1,8 +1,8 @@
 
 const express = require('express');
 
-const UsersService = require('../services/users');
-const UsersDBApi = require('../db/api/users');
+const UsermatchesService = require('../services/usermatches');
+const UsermatchesDBApi = require('../db/api/usermatches');
 const wrapAsync = require('../helpers').wrapAsync;
 
 const router = express.Router();
@@ -11,43 +11,33 @@ const router = express.Router();
  *  @swagger
  *  components:
  *    schemas:
- *      Users:
+ *      Usermatches:
  *        type: object
  *        properties:
 
- *          firstName:
+ *          matchedId:
  *            type: string
- *            default: firstName
- *          lastName:
+ *            default: matchedId
+ *          matchedType:
  *            type: string
- *            default: lastName
- *          phoneNumber:
- *            type: string
- *            default: phoneNumber
- *          email:
- *            type: string
- *            default: email
+ *            default: matchedType
 
- *          
- *          role:
- *            type: string
- *            default: user
  */
 
 /**
  *  @swagger
  * tags:
- *   name: Users
- *   description: The Users managing API
+ *   name: Usermatches
+ *   description: The Usermatches managing API
  */
 
   /**
   *  @swagger
-  *  /api/users:
+  *  /api/usermatches:
   *    post:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Users]
+  *      tags: [Usermatches]
   *      summary: Add new item
   *      description: Add new item
   *      requestBody:
@@ -59,14 +49,14 @@ const router = express.Router();
   *                data:
   *                  description: Data of the updated item
   *                  type: object
-  *                  $ref: "#/components/schemas/Users"
+  *                  $ref: "#/components/schemas/Usermatches"
   *      responses:
   *        200:
   *          description: The item was successfully added
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Users"
+  *                $ref: "#/components/schemas/Usermatches"
   *        401:
   *          $ref: "#/components/responses/UnauthorizedError"
   *        405:
@@ -76,18 +66,18 @@ const router = express.Router();
   */
 
 router.post('/', async (req, res) => {
-    await UsersService.create(req.body.data, req.currentUser, true, req.headers.referer);
+    await UsermatchesService.create(req.body.data, req.currentUser, true, req.headers.referer);
     const payload = true;
     res.status(200).send(payload);
 });
 
   /**
   *  @swagger
-  *  /api/users/{id}:
+  *  /api/usermatches/{id}:
   *    put:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Users]
+  *      tags: [Usermatches]
   *      summary: Update the data of the selected item
   *      description: Update the data of the selected item
   *      parameters:
@@ -110,7 +100,7 @@ router.post('/', async (req, res) => {
   *                data:
   *                  description: Data of the updated item
   *                  type: object
-  *                  $ref: "#/components/schemas/Users"
+  *                  $ref: "#/components/schemas/Usermatches"
   *              required:
   *                - id
   *      responses:
@@ -119,7 +109,7 @@ router.post('/', async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Users"
+  *                $ref: "#/components/schemas/Usermatches"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -131,18 +121,18 @@ router.post('/', async (req, res) => {
   */
 
 router.put('/:id', wrapAsync(async (req, res) => {
-  await UsersService.update(req.body.data, req.body.id, req.currentUser);
+  await UsermatchesService.update(req.body.data, req.body.id, req.currentUser);
   const payload = true;
   res.status(200).send(payload);
 }));
 
   /**
   * @swagger
-  *  /api/users/{id}:
+  *  /api/usermatches/{id}:
   *    delete:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Users]
+  *      tags: [Usermatches]
   *      summary: Delete the selected item
   *      description: Delete the selected item
   *      parameters:
@@ -158,7 +148,7 @@ router.put('/:id', wrapAsync(async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Users"
+  *                $ref: "#/components/schemas/Usermatches"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -170,29 +160,29 @@ router.put('/:id', wrapAsync(async (req, res) => {
   */
 
 router.delete('/:id', wrapAsync(async (req, res) => {
-  await UsersService.remove(req.params.id, req.currentUser);
+  await UsermatchesService.remove(req.params.id, req.currentUser);
   const payload = true;
   res.status(200).send(payload);
 }));
 
   /**
   *  @swagger
-  *  /api/users:
+  *  /api/usermatches:
   *    get:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Users]
-  *      summary: Get all users
-  *      description: Get all users
+  *      tags: [Usermatches]
+  *      summary: Get all usermatches
+  *      description: Get all usermatches
   *      responses:
   *        200:
-  *          description: Users list successfully received
+  *          description: Usermatches list successfully received
   *          content:
   *            application/json:
   *              schema:
   *                type: array
   *                items:
-  *                  $ref: "#/components/schemas/Users"
+  *                  $ref: "#/components/schemas/Usermatches"
   *        401:
   *          $ref: "#/components/responses/UnauthorizedError"
   *        404:
@@ -202,7 +192,7 @@ router.delete('/:id', wrapAsync(async (req, res) => {
   */
 
 router.get('/', wrapAsync(async (req, res) => {
-  const payload = await UsersDBApi.findAll(
+  const payload = await UsermatchesDBApi.findAll(
     req.query,
   );
 
@@ -210,7 +200,7 @@ router.get('/', wrapAsync(async (req, res) => {
 }));
 
 router.get('/autocomplete', async (req, res) => {
-  const payload = await UsersDBApi.findAllAutocomplete(
+  const payload = await UsermatchesDBApi.findAllAutocomplete(
     req.query.query,
     req.query.limit,
   );
@@ -220,11 +210,11 @@ router.get('/autocomplete', async (req, res) => {
 
   /**
   * @swagger
-  *  /api/users/{id}:
+  *  /api/usermatches/{id}:
   *    get:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Users]
+  *      tags: [Usermatches]
   *      summary: Get selected item
   *      description: Get selected item
   *      parameters:
@@ -240,7 +230,7 @@ router.get('/autocomplete', async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Users"
+  *                $ref: "#/components/schemas/Usermatches"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -252,54 +242,9 @@ router.get('/autocomplete', async (req, res) => {
   */
 
 router.get('/:id', wrapAsync(async (req, res) => {
-  const payload = await UsersDBApi.findBy(
+  const payload = await UsermatchesDBApi.findBy(
     { id: req.params.id },
   );
-
-    delete payload.password;
-
-  res.status(200).send(payload);
-}));
-
-/**
- * @swagger
- *  /api/users/calculate/{id}:
- *    get:
- *      security:
- *        - bearerAuth: []
- *      tags: [Users]
- *      summary: Calculates best matches for user
- *      description: Retrieves data from locationpreference, usersurvey, userpreference, and userquestionweight to calculate the top 10 best matches for the User. Then stores the results into the <> table.
- *      parameters:
- *        - in: path
- *          name: id
- *          description: ID of User
- *          required: true
- *          schema:
- *            type: string
- *      responses:
- *        200:
- *          description: Selected item successfully received
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/Users"
- *        400:
- *          description: Invalid ID supplied
- *        401:
- *          $ref: "#/components/responses/UnauthorizedError"
- *        404:
- *          description: Item not found
- *        500:
- *          description: Some server error
- */
-router.get('/calculate/:id', wrapAsync(async (req, res) => {
-  const payload = await UsersService.calculateMatchesBasedOnUserPreferences(req.params.id);
-
-
-  // check to make sure the payload exists
-
-  // store the payload data into <> table
 
   res.status(200).send(payload);
 }));

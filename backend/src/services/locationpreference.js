@@ -75,8 +75,6 @@ module.exports = class LocationpreferenceService {
       throw error;
     }
   }
-
-
   static async getAllPreferredLocationsBasedOnId(id) {
     const transaction = await db.sequelize.transaction();
 
