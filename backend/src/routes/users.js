@@ -261,6 +261,49 @@ router.get('/:id', wrapAsync(async (req, res) => {
   res.status(200).send(payload);
 }));
 
+/**
+ * @swagger
+ *  /api/users/calculate/{id}:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      tags: [Users]
+ *      summary: Calculates best matches for user
+ *      description: Retrieves data from locationpreference, usersurvey, userpreference, and userquestionweight to calculate the top 10 best matches for the User. Then stores the results into the <> table.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description: ID of User
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Selected item successfully received
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/Users"
+ *        400:
+ *          description: Invalid ID supplied
+ *        401:
+ *          $ref: "#/components/responses/UnauthorizedError"
+ *        404:
+ *          description: Item not found
+ *        500:
+ *          description: Some server error
+ */
+router.get('/calculate/:id', wrapAsync(async (req, res) => {
+  const payload = await UsersService.calculateMatchesBasedOnUserPreferences(req.params.id);
+
+
+  // check to make sure the payload exists
+
+  // store the payload data into <> table
+
+  res.status(200).send(payload);
+}));
+
 router.use('/', require('../helpers').commonErrorHandler);
 
 module.exports = router;

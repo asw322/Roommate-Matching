@@ -303,6 +303,47 @@ router.get('/:id', wrapAsync(async (req, res) => {
   res.status(200).send(payload);
 }));
 
+
+/**
+  * @swagger
+  *  /api/userquestionweight/user/{id}:
+  *    get:
+  *      security:
+  *        - bearerAuth: []
+  *      tags: [Userquestionweight]
+  *      summary: Get question weight results based on user ID
+  *      description: Get question weight results based on user ID
+  *      parameters:
+  *        - in: path
+  *          name: id
+  *          description: ID of User
+  *          required: true
+  *          schema:
+  *            type: string
+  *      responses:
+  *        200:
+  *          description: Selected item successfully received
+  *          content:
+  *            application/json:
+  *              schema:
+  *                $ref: "#/components/schemas/Userquestionweight"
+  *        400:
+  *          description: Invalid ID supplied
+  *        401:
+  *          $ref: "#/components/responses/UnauthorizedError"
+  *        404:
+  *          description: Item not found
+  *        500:
+  *          description: Some server error
+  */
+router.get('/user/:id', wrapAsync(async (req, res) => {
+  const payload = await UserquestionweightDBApi.findBy(
+    {createdById: req.params.id}, 
+  );
+
+  res.status(200).send(payload);
+}));
+
 router.use('/', require('../helpers').commonErrorHandler);
 
 module.exports = router;

@@ -104,5 +104,38 @@ module.exports = class UsersService {
       throw error;
     }
   }
+  static async calculateMatchesBasedOnUserPreferences(id) {
+    console.log("[calculateMatchesBasedOnUserPreferences]");
+    const transaction = await db.sequelize.transaction();
+
+    try {
+      // get user location preferences
+      let userLocationPreference = LocationPreferenceService.getAllPreferredLocationsBasedOnId(id);
+
+      // get user preferences
+      // let userPreferences = UserPreferenceService.getUserPreferences(id);
+
+      // get user question weights
+      // let userQuestionWeight = UserQuestionWeightService.getUserQuestionWeights(id);
+
+      // get ID of all users that match current user's location preference
+      // let validId = LocationPreferenceService.getAllIdBasedOnLocations(userLocationPreference);
+
+      // get all other user's weights
+      // let allOtherUserPreferences = UserPreferenceService.getAllOtherUserPreferences(id);
+
+      // get all other user's weights based on current user's location preference
+      // let allOtherUserPreferences = UserPreferenceService.getAllOtherUserPreferencesWithLocation(id, allId);
+
+      // compare algorithm
+      
+
+      await transaction.commit();
+      return userLocationPreference;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
 };
 

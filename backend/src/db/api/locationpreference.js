@@ -103,15 +103,21 @@ module.exports = class LocationpreferenceDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [ ];
+    let attributes = [ ];
 
     if (filter) {
       if (filter.id) {
         where = {
           ...where,
           ['id']: Utils.uuid(filter.id),
+        };
+      }
+
+      if(filter.createdById) {
+        where = {
+          ...where,
+          ['createdById']: Utils.uuid(filter.createdById),
         };
       }
 
@@ -124,6 +130,10 @@ module.exports = class LocationpreferenceDBApi {
             filter.city,
           ),
         };
+      }
+
+      if(filter.attributes) {
+        attributes = filter.attributes;
       }
 
       if (
@@ -169,6 +179,7 @@ module.exports = class LocationpreferenceDBApi {
       {
         where,
         include,
+        attributes,
         distinct: true,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
@@ -178,11 +189,6 @@ module.exports = class LocationpreferenceDBApi {
         transaction,
       },
     );
-
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
 
     return { rows, count };
   }

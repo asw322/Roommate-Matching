@@ -305,6 +305,15 @@ module.exports = class UserpreferenceDBApi {
         };
       }
 
+      if(filter.nid) {
+        where = {
+          ...where,
+          ['id']: {
+            [Op.ne]: Utils.uuid(filter.nid)
+          },
+        };
+      }
+      
       if (filter.q1Range) {
         const [start, end] = filter.q1Range;
 
@@ -875,5 +884,42 @@ module.exports = class UserpreferenceDBApi {
     }));
   }
 
+  static async findAllOtherBasedOnId(id, options) {
+    const transaction = (options && options.transaction) || undefined;
+
+    let userpreference = await db.userpreference.findAll(
+      {
+        where: {
+          createdById: {
+            [Op.ne]: id,
+          },
+        },
+      },
+      { transaction },
+    );
+
+    return userpreference;
+  }
+
+  static async findAllOtherBasedOnIdAndLocation(where, options) {
+    const transaction = (options && options.transaction) || undefined;
+
+    let userpreference = await db.userpreference.findAll(
+      {
+        where: {
+          id: {
+            [Op.ne]: id, 
+          }
+        },
+        attributes: ['id'],
+        include: [
+          {model: db.locationpreference, attributes:['id']}
+        ]
+      }, 
+      { transaction }
+    );
+
+    return userpreference;
+  }
 };
 
