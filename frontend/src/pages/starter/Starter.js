@@ -44,22 +44,6 @@ function Starter() {
         <div className={classes.links}>
           <h5>More useful links</h5>
           <div>
-            🌟
-            <a target={"_blank"} href="https://reactjs.org/">
-              {' '}
-              ReactJS
-            </a>
-          </div>
-          <div>
-            ✨
-
-            <a target={"_blank"} href="https://nodejs.org/en/">
-              {' '}
-              Node.js
-            </a>
-
-          </div>
-          <div>
             💫
             <a target={"_blank"} href="https://flatlogic.com/forum/">
               {' '}

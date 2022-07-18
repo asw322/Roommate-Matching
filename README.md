@@ -291,3 +291,19 @@ body: { "email": "admin@flatlogic.com", "password": "password" }
 
 admin@flatlogic bearer AUTH token:
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTkzYmY0YjUtOWYwNy00YmQ1LTlhNDMtZTdlNDFmM2U5NmFmIiwiZW1haWwiOiJhZG1pbkBmbGF0bG9naWMuY29tIn0sImlhdCI6MTY1NjQ0OTc3NSwiZXhwIjoxNjU2NDcxMzc1fQ.-1zAyvqLAF2Z9IFGfZrAWAXYseiXf5Qe53DTSqCtFtE
+
+How to run?
+How to run backend? 
+start a new terminal page 
+go to the root directory 
+cd backend 
+yarn install 
+yarn start
+
+How to run frontend? start a new terminal page go to the root directory cd frontend yarn install yarn start
+
+How to run psql? (optional) start a new terminal page go to the root directory psql -U postgres -d db_roommate_matching \dt+
+
+ex: select * from users;
+
+How to run Swagger? localhost:8080/api-docs /signin/local/ try it out copy the response body throw it into Authorize test out any APIs on Swagger
