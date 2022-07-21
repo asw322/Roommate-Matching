@@ -22,7 +22,7 @@ import Reset from "../pages/reset";
 
 // context
 import { useUserState } from "../context/UserContext";
-import {getHistory} from "../index";
+import { getHistory } from "../index";
 
 export default function App() {
   // global
@@ -51,8 +51,8 @@ export default function App() {
               <PublicRoute path='/starter' component={Starter} />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/verify-email" exact component={Verify} />
-              <PublicRoute path="/password-reset" exact component={Reset}/>
-              <Redirect from="*" to="/admin/dashboard"/>
+              <PublicRoute path="/password-reset" exact component={Reset} />
+              <Redirect from="*" to="/admin/dashboard" />
               <Route component={Error} />
             </Switch>
           </Router>
@@ -68,7 +68,7 @@ export default function App() {
       <Route
         {...rest}
         render={props =>
-            isAuth ? (
+          isAuth ? (
             React.createElement(component, props)
           ) : (
             <Redirect to={"/starter"} />
@@ -83,7 +83,7 @@ export default function App() {
       <Route
         {...rest}
         render={props =>
-            isAuth ? (
+          isAuth ? (
             <Redirect
               to={{
                 pathname: "/"

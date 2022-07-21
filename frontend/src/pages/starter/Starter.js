@@ -7,6 +7,14 @@ import useStyles from "./styles";
 import reactLogo from "../../images/react-logo.svg";
 
 import { Button } from "../../components/Wrappers";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 function Starter() {
   let classes = useStyles();
@@ -56,6 +64,74 @@ function Starter() {
               {' '}
               Material-UI
             </a>
+          </div>
+          <div>
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="Non-binary" control={<Radio />} label="Non-binary" />
+                <FormControlLabel value="My-identity-is-not-listed" control={<Radio />} label="My identity is not listed" />
+              </RadioGroup>
+            </FormControl>
+          </div>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                required
+                id="outlined-required"
+                label="First name"
+                defaultValue="Hello World"
+              />
+              <TextField
+                required
+                id="outlined-disabled"
+                label="Last name"
+                defaultValue="Hello World"
+              />
+              <TextField
+                required
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
+              <TextField
+                id="outlined-number"
+                label="Number"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+          </Box>
+          <div>
+            <FormControl>
+              <FormLabel id="cleaning">How do you prefer to clean</FormLabel>
+              <RadioGroup
+                aria-labelledby="cleaning"
+                // defaultValue="when-it-gets-bad"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel value="when-it-gets-bad" control={<Radio />} label="Whenever it gets bad" />
+                <FormControlLabel value="keep-common" control={<Radio />} label="I keep common spaces clean" />
+                <FormControlLabel value="clean-often" control={<Radio />} label="I like to pick up as I go" />
+                <FormControlLabel value="neat-freak" control={<Radio />} label="I am a neat freak" />
+              </RadioGroup>
+            </FormControl>
           </div>
         </div>
       </div>
