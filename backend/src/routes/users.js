@@ -4,6 +4,8 @@ const UsersService = require('../services/users');
 const UsersDBApi = require('../db/api/users');
 const wrapAsync = require('../helpers').wrapAsync;
 
+const UsermatchesService = require('../services/usermatches');
+
 const router = express.Router();
 
 /**
@@ -261,7 +263,6 @@ router.get('/autocomplete', async (req, res) => {
  *        500:
  *          description: Some server error
  */
-
 router.get(
   '/:id',
   wrapAsync(async (req, res) => {
@@ -272,6 +273,24 @@ router.get(
     res.status(200).send(payload);
   }),
 );
+
+router.get('/calculate/:id', wrapAsync(async (req, res) => {
+  const payload = await UsersService.calculateMatchesBasedOnUserPreferences(req.params.id);
+
+  if(payload) {
+    // try {
+    //   for(let i = 0; i < payload.length; i++) {
+    //     UsermatchesService.create(payload[i], req.currentUser);
+    //   }
+    // } catch(error) {
+    //   res.status(500).send('Failed to store user matches payload');
+    // }
+
+    res.status(200).send(payload);
+  } else {
+    res.status(400).send(payload);
+  }
+}));
 
 router.use('/', require('../helpers').commonErrorHandler);
 

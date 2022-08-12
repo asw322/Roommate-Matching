@@ -3,6 +3,7 @@
   "description": "Roommate Matching - template backend",
   "scripts": {
     "start": "npm run db:migrate && npm run db:seed && nodemon ./src/index.js",
+    "init": "npm run db:seed && nodemon ./src/index.js",
     "db:migrate": "sequelize-cli db:migrate",
     "db:seed": "sequelize-cli db:seed:all",
     "db:drop": "sequelize-cli db:drop",
@@ -44,3 +45,4 @@
     "sequelize-cli": "6.2.0"
   }
 }
+

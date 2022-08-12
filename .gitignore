@@ -1,0 +1,6 @@
+# Ignore these packages and files when pushing to git
+node_modules
+frontend/build
+yarn.lock
+package-lock.json
+node_modules

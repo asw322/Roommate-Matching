@@ -258,3 +258,83 @@ The **docker folder** contains a couple of helper scripts:
    Afterwards, continue to start your project in the backend directory by running:
 
    `yarn start`
+
+
+## Tooling
+How each new db table changes the project directory:
+
+backend:
+src/db/api/table.js
+src/db/models/table.js
+src/routes/table.js
+src/services/table.js
+
+frontend:
+src/actions/table/tableFormActions.js
+src/actions/table/tableListActions.js
+src/pages/CRUD/table/form/tableForm.js
+src/pages/CRUD/table/form/tableFormPage.js
+src/pages/CRUD/table/helpers/tableSelectItem.js
+src/pages/CRUD/table/helpers/tableFields.js
+src/pages/CRUD/table/table/tableFormatters.js
+src/pages/CRUD/table/table/tableTable.js
+src/reducers/table/tableFormReducers.js
+src/reducers/table/tableListReducers.js
+src/reducers/table/tableReducers.js
+
+psql -U postgres -d db_roommate_matching;
+
+to get new bearer auth token: 
+send on postman: flatlogic base app URL + /api/auth/signin/local
+body: { "email": "admin@flatlogic.com", "password": "password" }
+
+
+admin@flatlogic bearer AUTH token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTkzYmY0YjUtOWYwNy00YmQ1LTlhNDMtZTdlNDFmM2U5NmFmIiwiZW1haWwiOiJhZG1pbkBmbGF0bG9naWMuY29tIn0sImlhdCI6MTY1NjQ0OTc3NSwiZXhwIjoxNjU2NDcxMzc1fQ.-1zAyvqLAF2Z9IFGfZrAWAXYseiXf5Qe53DTSqCtFtE
+
+
+## How to run?
+How to run backend?
+start a new terminal page
+go to the root directory
+cd backend
+yarn install
+yarn start
+
+How to run frontend?
+start a new terminal page
+go to the root directory
+cd frontend 
+yarn install
+yarn start
+
+How to run psql?
+(optional)
+start a new terminal page 
+go to the root directory
+psql -U postgres -d db_roommate_matching
+\dt+
+
+ex:
+select * from users;
+
+How to run Swagger?
+localhost:8080/api-docs
+/signin/local/
+try it out
+copy the response body
+throw it into Authorize
+test out any APIs on Swagger
+
+
+## How to Debug? 
+1. How to delete postmaster.pid and resolve no 'postgres' role?
+  1. rm /usr/local/var/postgresql@13/postmaster.pid
+  2. brew services restart postgresql@13
+2. How to create db_roommate_matching? 
+  1. psql -U postgres
+  2. CREATE DATABASE db_roommate_matching
+  3. exit psql 
+  4. yarn run init
+3. How to run usersurvey? 
+  1. yarn run init
