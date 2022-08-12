@@ -6,6 +6,11 @@ const ValidationError = require('./notifications/errors/validation');
 const EmailSender = require('./email');
 const AuthService = require('./auth');
 
+const LocationPreferenceService = require('./locationpreference');
+const UserPreferenceService = require('./userpreference');
+const UserQuestionWeightService = require('./userquestionweight');
+const UserSurveyService = require('./usersurvey');
+
 module.exports = class UsersService {
   static async create(data, currentUser, sendInvitationEmails = true, host) {
     let transaction = await db.sequelize.transaction();
@@ -112,8 +117,19 @@ module.exports = class UsersService {
       // get user location preferences
       let userLocationPreference = LocationPreferenceService.getAllPreferredLocationsBasedOnId(id);
 
+      /**
+       * TODO: Figure out which design on getting on retrieving unique ids is the best way to minimize disk reads and I/O
+       * 1. how can we exclude for all current IDs in the query
+       * 2. should we just query for all users that matches location array and handle unique Id's as a business logic?
+       */
+      if(userLocationPreference && userLocationPreference.location > 0) {
+        for(let i = 0; i < userLocationPreference.length; i++) {
+          let validId = LocationPreferenceService.getAllIdBasedOnLocations()
+        }
+      }
+
       // get user preferences
-      // let userPreferences = UserPreferenceService.getUserPreferences(id);
+      let userPreferences = UserPreferenceService.getUserPreferences(id);
 
       // get user question weights
       // let userQuestionWeight = UserQuestionWeightService.getUserQuestionWeights(id);
