@@ -18,10 +18,6 @@ module.exports = class Helpers {
   }
 
   static jwtSign(data) {
-    return jwt.sign(data, config.secret_key, {expiresIn: '6h'});
-  };
-
-  static parseCommaStringIntoArray(arrayString) {
-    return arrayString.split(',');
+    return jwt.sign(data, config.secret_key, { expiresIn: '6h' });
   }
 };

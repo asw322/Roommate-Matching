@@ -1,4 +1,3 @@
-
 import auth from 'reducers/auth';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
@@ -31,6 +30,4 @@ export default (history) =>
     userquestionweight,
 
     usermatches,
-
   });
-

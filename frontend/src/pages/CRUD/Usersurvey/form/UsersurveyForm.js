@@ -26,234 +26,188 @@ import FormValidations from 'components/FormItems/formValidations';
 import Widget from 'components/Widget';
 
 const UsersurveyForm = (props) => {
-
   const {
-  isEditing,
-  isProfile,
-  findLoading,
-  saveLoading,
-  record,
-  onSubmit,
-  onCancel,
-  modal
+    isEditing,
+    isProfile,
+    findLoading,
+    saveLoading,
+    record,
+    onSubmit,
+    onCancel,
+    modal,
   } = props;
 
   const iniValues = () => {
-  return IniValues(usersurveyFields, record || {});
-  }
+    return IniValues(usersurveyFields, record || {});
+  };
 
   const formValidations = () => {
-  return FormValidations(usersurveyFields, record || {});
-  }
+    return FormValidations(usersurveyFields, record || {});
+  };
 
   const handleSubmit = (values) => {
-  const { id, ...data } = PreparedValues(usersurveyFields, values || {});
-  onSubmit(id, data);
+    const { id, ...data } = PreparedValues(usersurveyFields, values || {});
+    onSubmit(id, data);
   };
 
   const title = () => {
-  if(isProfile) {
-  return 'Edit My Profile';
-  }
+    if (isProfile) {
+      return 'Edit My Profile';
+    }
 
-  return isEditing
-  ? 'Edit Usersurvey'
-  : 'Add Usersurvey';
+    return isEditing ? 'Edit Usersurvey' : 'Add Usersurvey';
   };
 
   const renderForm = () => (
-  <Widget title={<h4>{title()}</h4>} collapse close>
-  <Formik
-          onSubmit={handleSubmit}
-  initialValues={iniValues()}
-  validationSchema={formValidations()}
-  >
-  {(form) => (
-  <form onSubmit={form.handleSubmit}>
-    <Grid container spacing={3} direction="column">
-
-      <Grid item>
-        <InputFormItem
-          name={'q1'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q2'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q3'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q4'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q5'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q6'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q7'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q8'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q9'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q10'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q11'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q12'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q13'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q14'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q15'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q16'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q17'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q18'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q19'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'q20'}
-          schema={usersurveyFields}
-        />
-      </Grid>
-
-  </Grid>
-  <Grid container spacing={3} mt={2}>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={form.handleSubmit}
+    <Widget title={<h4>{title()}</h4>} collapse close>
+      <Formik
+        onSubmit={handleSubmit}
+        initialValues={iniValues()}
+        validationSchema={formValidations()}
       >
-        Save
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={form.handleReset}
-      >
-        Reset
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={() => onCancel()}
-      >
-        Cancel
-      </Button>
-    </Grid>
-  </Grid>
-      </form>
-      )
-      }
-    </Formik>
-  </Widget>
+        {(form) => (
+          <form onSubmit={form.handleSubmit}>
+            <Grid container spacing={3} direction='column'>
+              <Grid item>
+                <InputFormItem name={'q1'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q2'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q3'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q4'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q5'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q6'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q7'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q8'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q9'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q10'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q11'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q12'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q13'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q14'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q15'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q16'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q17'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q18'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q19'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q20'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q21'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q22'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q23'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q24'} schema={usersurveyFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'q25'} schema={usersurveyFields} />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} mt={2}>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='contained'
+                  onClick={form.handleSubmit}
+                >
+                  Save
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={form.handleReset}
+                >
+                  Reset
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={() => onCancel()}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+    </Widget>
   );
   if (findLoading) {
-  return <Loader />;
+    return <Loader />;
   }
   if (isEditing && !record) {
-  return <Loader />;
+    return <Loader />;
   }
   return renderForm();
-  }
-  export default UsersurveyForm;
+};
+export default UsersurveyForm;

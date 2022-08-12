@@ -7,6 +7,6 @@ const LocationpreferenceTablePage = () => {
       <LocationpreferenceTable />
     </div>
   );
-}
+};
 
 export default LocationpreferenceTablePage;

@@ -7,6 +7,6 @@ const UserpreferenceTablePage = () => {
       <UserpreferenceTable />
     </div>
   );
-}
+};
 
 export default UserpreferenceTablePage;

@@ -17,14 +17,14 @@ const actions = {
         type: 'USERMATCHES_FORM_FIND_STARTED',
       });
 
-      axios.get(`/usermatches/${id}`).then(res => {
+      axios.get(`/usermatches/${id}`).then((res) => {
         const record = res.data;
 
         dispatch({
           type: 'USERMATCHES_FORM_FIND_SUCCESS',
           payload: record,
         });
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -42,13 +42,13 @@ const actions = {
         type: 'USERMATCHES_FORM_CREATE_STARTED',
       });
 
-      axios.post('/usermatches', { data: values }).then(res => {
+      axios.post('/usermatches', { data: values }).then((res) => {
         dispatch({
           type: 'USERMATCHES_FORM_CREATE_SUCCESS',
         });
         showSnackbar({ type: 'success', message: 'Usermatches created' });
         dispatch(push('/admin/usermatches'));
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -58,16 +58,13 @@ const actions = {
     }
   },
 
-  doUpdate: (id, values, isProfile) => async (
-    dispatch,
-    getState,
-  ) => {
+  doUpdate: (id, values, isProfile) => async (dispatch, getState) => {
     try {
       dispatch({
         type: 'USERMATCHES_FORM_UPDATE_STARTED',
       });
 
-      await axios.put(`/usermatches/${id}`, {id, data: values});
+      await axios.put(`/usermatches/${id}`, { id, data: values });
 
       dispatch(doInit());
 

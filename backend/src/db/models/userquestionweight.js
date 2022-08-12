@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const userquestionweight = sequelize.define(
     'userquestionweight',
     {
@@ -14,104 +14,92 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-q1: {
+      q1: {
         type: DataTypes.INTEGER,
-
       },
 
-q2: {
+      q2: {
         type: DataTypes.INTEGER,
-
       },
 
-q3: {
+      q3: {
         type: DataTypes.INTEGER,
-
       },
 
-q4: {
+      q4: {
         type: DataTypes.INTEGER,
-
       },
 
-q5: {
+      q5: {
         type: DataTypes.INTEGER,
-
       },
 
-q6: {
+      q6: {
         type: DataTypes.INTEGER,
-
       },
 
-q7: {
+      q7: {
         type: DataTypes.INTEGER,
-
       },
 
-q8: {
+      q8: {
         type: DataTypes.INTEGER,
-
       },
 
-q9: {
+      q9: {
         type: DataTypes.INTEGER,
-
       },
 
-q10: {
+      q10: {
         type: DataTypes.INTEGER,
-
       },
 
-q11: {
+      q11: {
         type: DataTypes.INTEGER,
-
       },
 
-q12: {
+      q12: {
         type: DataTypes.INTEGER,
-
       },
 
-q13: {
+      q13: {
         type: DataTypes.INTEGER,
-
       },
 
-q14: {
+      q14: {
         type: DataTypes.INTEGER,
-
       },
 
-q15: {
+      q15: {
         type: DataTypes.INTEGER,
-
       },
 
-q16: {
+      q16: {
         type: DataTypes.INTEGER,
-
       },
 
-q17: {
+      q17: {
         type: DataTypes.INTEGER,
-
       },
 
-q18: {
+      q18: {
         type: DataTypes.INTEGER,
-
       },
 
-q19: {
+      q19: {
         type: DataTypes.INTEGER,
-
       },
 
-q20: {
+      q20: {
         type: DataTypes.INTEGER,
+      },
 
+      q21: {
+        type: DataTypes.INTEGER,
+      },
+
+      q22: {
+        type: DataTypes.INTEGER,
       },
 
       importHash: {
@@ -128,7 +116,6 @@ q20: {
   );
 
   userquestionweight.associate = (db) => {
-
     db.userquestionweight.belongsTo(db.users, {
       as: 'createdBy',
     });
@@ -140,4 +127,3 @@ q20: {
 
   return userquestionweight;
 };
-

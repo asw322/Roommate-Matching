@@ -11,10 +11,19 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.addColumn(
-        'usermatches',
-        'matchedType',
+        'userpreference',
+        'q21',
         {
-          type: Sequelize.DataTypes.TEXT,
+          type: Sequelize.DataTypes.INTEGER,
+        },
+        { transaction },
+      );
+
+      await queryInterface.addColumn(
+        'userpreference',
+        'q22',
+        {
+          type: Sequelize.DataTypes.INTEGER,
         },
         { transaction },
       );
@@ -36,7 +45,11 @@ module.exports = {
      */
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.removeColumn('usermatches', 'matchedType', {
+      await queryInterface.removeColumn('userpreference', 'q22', {
+        transaction,
+      });
+
+      await queryInterface.removeColumn('userpreference', 'q21', {
         transaction,
       });
 

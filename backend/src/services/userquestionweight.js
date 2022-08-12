@@ -5,69 +5,54 @@ module.exports = class UserquestionweightService {
   static async create(data, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      await UserquestionweightDBApi.create(
-        data,
-        {
-          currentUser,
-          transaction,
-        },
-      );
+      await UserquestionweightDBApi.create(data, {
+        currentUser,
+        transaction,
+      });
 
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();
       throw error;
     }
-  };
+  }
   static async update(data, id, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
       let userquestionweight = await UserquestionweightDBApi.findBy(
-        {id},
-        {transaction},
+        { id },
+        { transaction },
       );
 
       if (!userquestionweight) {
-        throw new ValidationError(
-          'userquestionweightNotFound',
-        );
+        throw new ValidationError('userquestionweightNotFound');
       }
 
-      await UserquestionweightDBApi.update(
-        id,
-        data,
-        {
-          currentUser,
-          transaction,
-        },
-      );
+      await UserquestionweightDBApi.update(id, data, {
+        currentUser,
+        transaction,
+      });
 
       await transaction.commit();
       return userquestionweight;
-
     } catch (error) {
       await transaction.rollback();
       throw error;
     }
-  };
+  }
 
   static async remove(id, currentUser) {
     const transaction = await db.sequelize.transaction();
 
     try {
       if (currentUser.role !== 'admin') {
-        throw new ValidationError(
-          'errors.forbidden.message',
-        );
+        throw new ValidationError('errors.forbidden.message');
       }
 
-      await UserquestionweightDBApi.remove(
-        id,
-        {
-          currentUser,
-          transaction,
-        },
-      );
+      await UserquestionweightDBApi.remove(id, {
+        currentUser,
+        transaction,
+      });
 
       await transaction.commit();
     } catch (error) {
@@ -75,22 +60,4 @@ module.exports = class UserquestionweightService {
       throw error;
     }
   }
-  static async getUserQuestionWeights(id) {
-    const transaction = await db.sequelize.transaction();
-
-    try {
-      let userquestionweight = await UserquestionweightDBApi.findBy({createdById: id}, {transaction}, );
-
-      if (!userquestionweight) {
-        throw new ValidationError('userquestionweightNotFound', );
-      }
-
-      await transaction.commit();
-      return userquestionweight;
-    } catch(error) {
-      await transaction.rollback();
-      throw error;
-    }
-  }
 };
-

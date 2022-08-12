@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 async function selectList(query, limit) {
   const params = { query, limit };
-  const response = await axios.get(`/locationpreference/autocomplete`, { params });
+  const response = await axios.get(`/locationpreference/autocomplete`, {
+    params,
+  });
   return response.data;
 }
 
@@ -50,10 +52,7 @@ const LocationpreferenceSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +65,10 @@ const LocationpreferenceSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.locationpreference.hasPermissionToCreate
+  hasPermissionToCreate: state.locationpreference.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  LocationpreferenceSelectItem,
-);
+export default connect(select)(LocationpreferenceSelectItem);
