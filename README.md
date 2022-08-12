@@ -325,3 +325,16 @@ try it out
 copy the response body
 throw it into Authorize
 test out any APIs on Swagger
+
+
+## How to Debug? 
+1. How to delete postmaster.pid and resolve no 'postgres' role?
+  1. rm /usr/local/var/postgresql@13/postmaster.pid
+  2. brew services restart postgresql@13
+2. How to create db_roommate_matching? 
+  1. psql -U postgres
+  2. CREATE DATABASE db_roommate_matching
+  3. exit psql 
+  4. yarn run init
+3. How to run usersurvey? 
+  1. yarn run init
