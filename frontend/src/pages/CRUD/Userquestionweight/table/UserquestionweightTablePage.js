@@ -7,6 +7,6 @@ const UserquestionweightTablePage = () => {
       <UserquestionweightTable />
     </div>
   );
-}
+};
 
 export default UserquestionweightTablePage;

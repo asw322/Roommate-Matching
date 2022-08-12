@@ -1,27 +1,19 @@
-
 const usermatchesFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    matchedId: { type: 'string', label: 'Matched Id',
+  matchedId: {
+    type: 'string',
+    label: 'Matched Id',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  matchedType: {
+    type: 'string',
+    label: 'Matched Type',
 
-]
-
-    },
-
-    matchedType: { type: 'string', label: 'Matched Type',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-}
+    options: [{ value: 'value', label: 'value' }],
+  },
+};
 
 export default usermatchesFields;

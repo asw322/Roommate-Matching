@@ -1,207 +1,159 @@
-
 const userquestionweightFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    q1: { type: 'int', label: 'Q 1',
+  q1: {
+    type: 'int',
+    label: 'Q 1',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  q2: {
+    type: 'int',
+    label: 'Q 2',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  q3: {
+    type: 'int',
+    label: 'Q 3',
 
-    q2: { type: 'int', label: 'Q 2',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  q4: {
+    type: 'int',
+    label: 'Q 4',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  q5: {
+    type: 'int',
+    label: 'Q 5',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    q3: { type: 'int', label: 'Q 3',
+  q6: {
+    type: 'int',
+    label: 'Q 6',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  q7: {
+    type: 'int',
+    label: 'Q 7',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  q8: {
+    type: 'int',
+    label: 'Q 8',
 
-    q4: { type: 'int', label: 'Q 4',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  q9: {
+    type: 'int',
+    label: 'Q 9',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  q10: {
+    type: 'int',
+    label: 'Q 10',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    q5: { type: 'int', label: 'Q 5',
+  q11: {
+    type: 'int',
+    label: 'Q 11',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  q12: {
+    type: 'int',
+    label: 'Q 12',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  q13: {
+    type: 'int',
+    label: 'Q 13',
 
-    q6: { type: 'int', label: 'Q 6',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  q14: {
+    type: 'int',
+    label: 'Q 14',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  q15: {
+    type: 'int',
+    label: 'Q 15',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    q7: { type: 'int', label: 'Q 7',
+  q16: {
+    type: 'int',
+    label: 'Q 16',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  q17: {
+    type: 'int',
+    label: 'Q 17',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  q18: {
+    type: 'int',
+    label: 'Q 18',
 
-    q8: { type: 'int', label: 'Q 8',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  q19: {
+    type: 'int',
+    label: 'Q 19',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  q20: {
+    type: 'int',
+    label: 'Q 20',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    q9: { type: 'int', label: 'Q 9',
+  q21: {
+    type: 'int',
+    label: 'Q 21',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  q22: {
+    type: 'int',
+    label: 'Q 22',
 
-]
-
-    },
-
-    q10: { type: 'int', label: 'Q 10',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q11: { type: 'int', label: 'Q 11',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q12: { type: 'int', label: 'Q 12',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q13: { type: 'int', label: 'Q 13',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q14: { type: 'int', label: 'Q 14',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q15: { type: 'int', label: 'Q 15',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q16: { type: 'int', label: 'Q 16',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q17: { type: 'int', label: 'Q 17',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q18: { type: 'int', label: 'Q 18',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q19: { type: 'int', label: 'Q 19',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    q20: { type: 'int', label: 'Q 20',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-}
+    options: [{ value: 'value', label: 'value' }],
+  },
+};
 
 export default userquestionweightFields;

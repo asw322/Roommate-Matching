@@ -27,8 +27,8 @@ const InputFormItem = (props) => {
       {({ form }) => (
         <>
           <TextField
-            id="outlined-basic"
-            variant="outlined"
+            id='outlined-basic'
+            variant='outlined'
             fullWidth
             label={label}
             multiline={multiline}
@@ -46,11 +46,7 @@ const InputFormItem = (props) => {
             placeholder={placeholder || undefined}
             autoFocus={autoFocus || undefined}
             autoComplete={autoComplete || undefined}
-            error={FormErrors.validateStatus(
-              form,
-              name,
-              errorMessage,
-            )}
+            error={FormErrors.validateStatus(form, name, errorMessage)}
             {...inputProps}
           />
           <div className='invalid-feedback'>

@@ -7,6 +7,6 @@ const UsermatchesTablePage = () => {
       <UsermatchesTable />
     </div>
   );
-}
+};
 
 export default UsermatchesTablePage;

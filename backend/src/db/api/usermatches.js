@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,37 +7,28 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class UsermatchesDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const usermatches = await db.usermatches.create(
-  {
-  id: data.id || undefined,
+    const usermatches = await db.usermatches.create(
+      {
+        id: data.id || undefined,
 
-    matchedId: data.matchedId
-    ||
-    null
-,
+        matchedId: data.matchedId || null,
+        matchedType: data.matchedType || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    matchedType: data.matchedType
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return usermatches;
+    return usermatches;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const usermatches = await db.usermatches.findByPk(id, {
@@ -47,39 +37,33 @@ module.exports = class UsermatchesDBApi {
 
     await usermatches.update(
       {
-
-        matchedId: data.matchedId
-        ||
-        null
-,
-
-        matchedType: data.matchedType
-        ||
-        null
-,
-
+        matchedId: data.matchedId || null,
+        matchedType: data.matchedType || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return usermatches;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const usermatches = await db.usermatches.findByPk(id, options);
 
-    await usermatches.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await usermatches.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await usermatches.destroy({
-      transaction
+      transaction,
     });
 
     return usermatches;
@@ -97,7 +81,7 @@ module.exports = class UsermatchesDBApi {
       return usermatches;
     }
 
-    const output = usermatches.get({plain: true});
+    const output = usermatches.get({ plain: true });
 
     return output;
   }
@@ -113,9 +97,7 @@ module.exports = class UsermatchesDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -128,11 +110,7 @@ module.exports = class UsermatchesDBApi {
       if (filter.matchedId) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'usermatches',
-            'matchedId',
-            filter.matchedId,
-          ),
+          [Op.and]: Utils.ilike('usermatches', 'matchedId', filter.matchedId),
         };
       }
 
@@ -155,9 +133,7 @@ module.exports = class UsermatchesDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -186,24 +162,23 @@ module.exports = class UsermatchesDBApi {
       }
     }
 
-    let { rows, count } = await db.usermatches.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.usermatches.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -215,17 +190,13 @@ module.exports = class UsermatchesDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'usermatches',
-            'id',
-            query,
-          ),
+          Utils.ilike('usermatches', 'id', query),
         ],
       };
     }
 
     const records = await db.usermatches.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -236,6 +207,4 @@ module.exports = class UsermatchesDBApi {
       label: record.id,
     }));
   }
-
 };
-

@@ -7,6 +7,6 @@ const UsersurveyTablePage = () => {
       <UsersurveyTable />
     </div>
   );
-}
+};
 
 export default UsersurveyTablePage;

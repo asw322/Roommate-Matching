@@ -17,14 +17,14 @@ const actions = {
         type: 'USERPREFERENCE_FORM_FIND_STARTED',
       });
 
-      axios.get(`/userpreference/${id}`).then(res => {
+      axios.get(`/userpreference/${id}`).then((res) => {
         const record = res.data;
 
         dispatch({
           type: 'USERPREFERENCE_FORM_FIND_SUCCESS',
           payload: record,
         });
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -42,13 +42,13 @@ const actions = {
         type: 'USERPREFERENCE_FORM_CREATE_STARTED',
       });
 
-      axios.post('/userpreference', { data: values }).then(res => {
+      axios.post('/userpreference', { data: values }).then((res) => {
         dispatch({
           type: 'USERPREFERENCE_FORM_CREATE_SUCCESS',
         });
         showSnackbar({ type: 'success', message: 'Userpreference created' });
         dispatch(push('/admin/userpreference'));
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -58,16 +58,13 @@ const actions = {
     }
   },
 
-  doUpdate: (id, values, isProfile) => async (
-    dispatch,
-    getState,
-  ) => {
+  doUpdate: (id, values, isProfile) => async (dispatch, getState) => {
     try {
       dispatch({
         type: 'USERPREFERENCE_FORM_UPDATE_STARTED',
       });
 
-      await axios.put(`/userpreference/${id}`, {id, data: values});
+      await axios.put(`/userpreference/${id}`, { id, data: values });
 
       dispatch(doInit());
 

@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,127 +7,48 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class UserquestionweightDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const userquestionweight = await db.userquestionweight.create(
-  {
-  id: data.id || undefined,
+    const userquestionweight = await db.userquestionweight.create(
+      {
+        id: data.id || undefined,
 
-    q1: data.q1
-    ||
-    null
-,
+        q1: data.q1 || null,
+        q2: data.q2 || null,
+        q3: data.q3 || null,
+        q4: data.q4 || null,
+        q5: data.q5 || null,
+        q6: data.q6 || null,
+        q7: data.q7 || null,
+        q8: data.q8 || null,
+        q9: data.q9 || null,
+        q10: data.q10 || null,
+        q11: data.q11 || null,
+        q12: data.q12 || null,
+        q13: data.q13 || null,
+        q14: data.q14 || null,
+        q15: data.q15 || null,
+        q16: data.q16 || null,
+        q17: data.q17 || null,
+        q18: data.q18 || null,
+        q19: data.q19 || null,
+        q20: data.q20 || null,
+        q21: data.q21 || null,
+        q22: data.q22 || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    q2: data.q2
-    ||
-    null
-,
-
-    q3: data.q3
-    ||
-    null
-,
-
-    q4: data.q4
-    ||
-    null
-,
-
-    q5: data.q5
-    ||
-    null
-,
-
-    q6: data.q6
-    ||
-    null
-,
-
-    q7: data.q7
-    ||
-    null
-,
-
-    q8: data.q8
-    ||
-    null
-,
-
-    q9: data.q9
-    ||
-    null
-,
-
-    q10: data.q10
-    ||
-    null
-,
-
-    q11: data.q11
-    ||
-    null
-,
-
-    q12: data.q12
-    ||
-    null
-,
-
-    q13: data.q13
-    ||
-    null
-,
-
-    q14: data.q14
-    ||
-    null
-,
-
-    q15: data.q15
-    ||
-    null
-,
-
-    q16: data.q16
-    ||
-    null
-,
-
-    q17: data.q17
-    ||
-    null
-,
-
-    q18: data.q18
-    ||
-    null
-,
-
-    q19: data.q19
-    ||
-    null
-,
-
-    q20: data.q20
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return userquestionweight;
+    return userquestionweight;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const userquestionweight = await db.userquestionweight.findByPk(id, {
@@ -137,129 +57,56 @@ module.exports = class UserquestionweightDBApi {
 
     await userquestionweight.update(
       {
-
-        q1: data.q1
-        ||
-        null
-,
-
-        q2: data.q2
-        ||
-        null
-,
-
-        q3: data.q3
-        ||
-        null
-,
-
-        q4: data.q4
-        ||
-        null
-,
-
-        q5: data.q5
-        ||
-        null
-,
-
-        q6: data.q6
-        ||
-        null
-,
-
-        q7: data.q7
-        ||
-        null
-,
-
-        q8: data.q8
-        ||
-        null
-,
-
-        q9: data.q9
-        ||
-        null
-,
-
-        q10: data.q10
-        ||
-        null
-,
-
-        q11: data.q11
-        ||
-        null
-,
-
-        q12: data.q12
-        ||
-        null
-,
-
-        q13: data.q13
-        ||
-        null
-,
-
-        q14: data.q14
-        ||
-        null
-,
-
-        q15: data.q15
-        ||
-        null
-,
-
-        q16: data.q16
-        ||
-        null
-,
-
-        q17: data.q17
-        ||
-        null
-,
-
-        q18: data.q18
-        ||
-        null
-,
-
-        q19: data.q19
-        ||
-        null
-,
-
-        q20: data.q20
-        ||
-        null
-,
-
+        q1: data.q1 || null,
+        q2: data.q2 || null,
+        q3: data.q3 || null,
+        q4: data.q4 || null,
+        q5: data.q5 || null,
+        q6: data.q6 || null,
+        q7: data.q7 || null,
+        q8: data.q8 || null,
+        q9: data.q9 || null,
+        q10: data.q10 || null,
+        q11: data.q11 || null,
+        q12: data.q12 || null,
+        q13: data.q13 || null,
+        q14: data.q14 || null,
+        q15: data.q15 || null,
+        q16: data.q16 || null,
+        q17: data.q17 || null,
+        q18: data.q18 || null,
+        q19: data.q19 || null,
+        q20: data.q20 || null,
+        q21: data.q21 || null,
+        q22: data.q22 || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return userquestionweight;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
-    const userquestionweight = await db.userquestionweight.findByPk(id, options);
+    const userquestionweight = await db.userquestionweight.findByPk(
+      id,
+      options,
+    );
 
-    await userquestionweight.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await userquestionweight.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await userquestionweight.destroy({
-      transaction
+      transaction,
     });
 
     return userquestionweight;
@@ -277,7 +124,7 @@ module.exports = class UserquestionweightDBApi {
       return userquestionweight;
     }
 
-    const output = userquestionweight.get({plain: true});
+    const output = userquestionweight.get({ plain: true });
 
     return output;
   }
@@ -293,9 +140,7 @@ module.exports = class UserquestionweightDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -785,6 +630,54 @@ module.exports = class UserquestionweightDBApi {
         }
       }
 
+      if (filter.q21Range) {
+        const [start, end] = filter.q21Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q21: {
+              ...where.q21,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q21: {
+              ...where.q21,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.q22Range) {
+        const [start, end] = filter.q22Range;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            q22: {
+              ...where.q22,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            q22: {
+              ...where.q22,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
       if (
         filter.active === true ||
         filter.active === 'true' ||
@@ -793,9 +686,7 @@ module.exports = class UserquestionweightDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -824,24 +715,23 @@ module.exports = class UserquestionweightDBApi {
       }
     }
 
-    let { rows, count } = await db.userquestionweight.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.userquestionweight.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -853,17 +743,13 @@ module.exports = class UserquestionweightDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'userquestionweight',
-            'id',
-            query,
-          ),
+          Utils.ilike('userquestionweight', 'id', query),
         ],
       };
     }
 
     const records = await db.userquestionweight.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -874,6 +760,4 @@ module.exports = class UserquestionweightDBApi {
       label: record.id,
     }));
   }
-
 };
-

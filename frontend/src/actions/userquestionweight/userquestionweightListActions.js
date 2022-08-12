@@ -6,25 +6,24 @@ async function list(filter) {
   const response = await axios.get(
     `/userquestionweight?page=${filter.page}&limit=${filter.limit}
 
-    &userquestionweight=${filter.userquestionweight ? filter.userquestionweight : ''}
+    &userquestionweight=${
+      filter.userquestionweight ? filter.userquestionweight : ''
+    }
     &${queryString.stringify(filter.orderBy)}${filter.request}`,
   );
   return response.data;
 }
 
 async function filterUserquestionweight(request, filter) {
-  const response = await axios.get(`/userquestionweight?page=${filter.page}&limit=${filter.limit}${request}`);
+  const response = await axios.get(
+    `/userquestionweight?page=${filter.page}&limit=${filter.limit}${request}`,
+  );
   return response.data;
 }
 
 const actions = {
-
-  doFilter: (request, filter) => async (
-    dispatch,
-    getState,
-  ) => {
+  doFilter: (request, filter) => async (dispatch, getState) => {
     try {
-
       const response = await filterUserquestionweight(request, filter);
 
       dispatch({
@@ -38,37 +37,36 @@ const actions = {
       Errors.handle(error);
       dispatch({
         type: 'USERQUESTIONWEIGHT_LIST_FETCH_ERROR',
-      })
-    }
-  },
-
-  doFetch: (filter, keepPagination = false) => async (
-    dispatch,
-    getState,
-  ) => {
-    try {
-      dispatch({
-        type: 'USERQUESTIONWEIGHT_LIST_FETCH_STARTED',
-        payload: { filter, keepPagination },
-      });
-
-      const response = await list(filter);
-
-      dispatch({
-        type: 'USERQUESTIONWEIGHT_LIST_FETCH_SUCCESS',
-        payload: {
-          rows: response.rows,
-          count: response.count,
-        },
-      });
-    } catch (error) {
-      Errors.handle(error);
-
-      dispatch({
-        type: 'USERQUESTIONWEIGHT_LIST_FETCH_ERROR',
       });
     }
   },
+
+  doFetch:
+    (filter, keepPagination = false) =>
+    async (dispatch, getState) => {
+      try {
+        dispatch({
+          type: 'USERQUESTIONWEIGHT_LIST_FETCH_STARTED',
+          payload: { filter, keepPagination },
+        });
+
+        const response = await list(filter);
+
+        dispatch({
+          type: 'USERQUESTIONWEIGHT_LIST_FETCH_SUCCESS',
+          payload: {
+            rows: response.rows,
+            count: response.count,
+          },
+        });
+      } catch (error) {
+        Errors.handle(error);
+
+        dispatch({
+          type: 'USERQUESTIONWEIGHT_LIST_FETCH_ERROR',
+        });
+      }
+    },
 
   doDelete: (filter, id) => async (dispatch) => {
     try {
@@ -76,7 +74,7 @@ const actions = {
         type: 'USERQUESTIONWEIGHT_LIST_DELETE_STARTED',
       });
 
-      await axios.delete(`/userquestionweight/${id}`)
+      await axios.delete(`/userquestionweight/${id}`);
 
       dispatch({
         type: 'USERQUESTIONWEIGHT_LIST_DELETE_SUCCESS',
@@ -90,7 +88,6 @@ const actions = {
           count: response.count,
         },
       });
-
     } catch (error) {
       Errors.handle(error);
 
@@ -100,19 +97,18 @@ const actions = {
     }
   },
   doOpenConfirm: (id) => async (dispatch) => {
-      dispatch({
-        type: 'USERQUESTIONWEIGHT_LIST_OPEN_CONFIRM',
-        payload: {
-          id: id
-        },
-      });
+    dispatch({
+      type: 'USERQUESTIONWEIGHT_LIST_OPEN_CONFIRM',
+      payload: {
+        id: id,
+      },
+    });
   },
   doCloseConfirm: () => async (dispatch) => {
-      dispatch({
-        type: 'USERQUESTIONWEIGHT_LIST_CLOSE_CONFIRM',
-      });
+    dispatch({
+      type: 'USERQUESTIONWEIGHT_LIST_CLOSE_CONFIRM',
+    });
   },
 };
-
 
 export default actions;
