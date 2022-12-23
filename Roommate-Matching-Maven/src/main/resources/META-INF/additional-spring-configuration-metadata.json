@@ -1,0 +1,13 @@
+{"properties": [{
+  "name": "environment",
+  "type": "java.lang.String",
+  "description": "A description for 'environment'"
+}]}{"properties": [{
+  "name": "roommate.matching.server.http.port",
+  "type": "java.lang.String",
+  "description": "A description for 'roommate.matching.server.http.port'"
+}]}{"properties": [{
+  "name": "roommate.matching.server.url",
+  "type": "java.lang.String",
+  "description": "A description for 'roommate.matching.server.url'"
+}]}
