@@ -10,19 +10,25 @@ import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "answer")
 public class AnswerItem {
+
+	public enum AnswerType {
+		GENERAL, PERSONAL, PREFERENCE;
+	}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "answerId")
@@ -41,6 +47,10 @@ public class AnswerItem {
 	@Column(name = "data")
 	@NotEmpty(message = "Please provide your answer")
 	private String data;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type", nullable = false)
+	private AnswerType type;
 
     public Long getId() {
 		return answerId;
@@ -74,8 +84,16 @@ public class AnswerItem {
 		this.data = data;
 	}
 
+	public AnswerType getAnswerType() {
+		return type;
+	}
+
+	public void setAnswerType(final AnswerType type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return Stream.of(String.valueOf(answerId), user.toString(), surveyQuestion.toString(), data).collect(Collectors.joining("-"));
+		return Stream.of(String.valueOf(answerId), user.toString(), surveyQuestion.toString(), data, type.name()).collect(Collectors.joining("-"));
 	}
 }

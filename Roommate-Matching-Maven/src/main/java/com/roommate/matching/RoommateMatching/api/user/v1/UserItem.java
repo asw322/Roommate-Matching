@@ -178,6 +178,6 @@ public class UserItem {
 
 	@Override
 	public String toString() {
-		return Stream.of(String.valueOf(userId), email, password, firstName, lastName, userLocation.toString()).collect(Collectors.joining("-"));
+		return Stream.of(String.valueOf(userId), email, password, firstName, lastName).collect(Collectors.joining("-"));
 	}
 }

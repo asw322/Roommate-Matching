@@ -11,5 +11,10 @@ public class UserPreferredLocationContainerService {
     @Autowired
     private UserPreferredLocationRepository userPreferredLocationRepository;
 
-    // TODO: continue
+    public UserPreferredLocationItem createUserPreferredLocation(final UserItem user, final String location) {
+        final UserPreferredLocationItem userPreferredLocation = new UserPreferredLocationItem();
+        userPreferredLocation.setUser(user);
+        userPreferredLocation.setLocation(location);
+        return userPreferredLocationRepository.save(userPreferredLocation);
+    }
 }

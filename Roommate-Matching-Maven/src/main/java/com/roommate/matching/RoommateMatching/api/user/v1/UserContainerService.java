@@ -25,13 +25,17 @@ public class UserContainerService {
     private UserRepository userRepository;
 
     @Autowired
-    private UserPreferredLocationRepository userPreferredLocationRepository;
+    private UserPreferredLocationContainerService userPreferredLocationContainerService;
 
     @Autowired
     private JavaMailSender mailSender;
 
     @Value("${roommate.matching.server.url}")
     private String serverUrl;
+
+    public java.util.Optional<UserItem> findUserById(final Long id) {
+        return userRepository.findById(id);
+    }
 
     public Optional<UserItem> findUserByEmail(final String email) {
         return userRepository.findByEmail(email);
@@ -78,8 +82,8 @@ public class UserContainerService {
            Strings.isNullOrEmpty(parameters.get("pass")) ||
            Strings.isNullOrEmpty(parameters.get("firstname")) || 
            Strings.isNullOrEmpty(parameters.get("lastname")) ||
-           Strings.isNullOrEmpty(parameters.get("preferredlocation"))) {
-            return "Missing required params (email, pass, firstname, lastname, preferredlocation)";
+           Strings.isNullOrEmpty(parameters.get("preferredLocation"))) {
+            return "Missing required params (email, pass, firstname, lastname, preferredLocation)";
         }
 
         Optional<UserItem> userExistOptional = userRepository.findByEmail(parameters.get("email"));
@@ -87,29 +91,20 @@ public class UserContainerService {
             return "User already exists, please log in";
         }
 
-        final UserItem insertItem = new UserItem();
-        insertItem.setEmail(parameters.get("email"));
-        insertItem.setPassword(parameters.get("pass"));
-        insertItem.setFirstName(parameters.get("firstname"));
-        insertItem.setLastName(parameters.get("lastname"));
-        insertItem.setEnabled(true);
-        userRepository.save(insertItem);
-
-        if(!Strings.isNullOrEmpty(parameters.get("address"))) {
-            setUserLocation(parameters.get("address"));
-        }
-
+        final UserItem user = new UserItem();
+        user.setEmail(parameters.get("email"));
+        user.setPassword(parameters.get("pass"));
+        user.setFirstName(parameters.get("firstname"));
+        user.setLastName(parameters.get("lastname"));
+        user.setEnabled(true);
+        userRepository.save(user);
+        setUserPreferredLocation(user, parameters.get("preferredLocation"));
 
         return "User created";
     }
 
-    public void setUserLocation(final String address) {
-        // googe maps api geocoding "address" => (lat, lng)
-        // store into UserLocationItem
-    }
-
-    public void setUserPreferredLocation(final String location) {
-        // TODO: use new repository to create a new object; test
+    public void setUserPreferredLocation(final UserItem user, final String location) {
+        userPreferredLocationContainerService.createUserPreferredLocation(user, location);
     }
 
     public void setUserInfoById(final Long id, final String firstName, final String lastName) {
