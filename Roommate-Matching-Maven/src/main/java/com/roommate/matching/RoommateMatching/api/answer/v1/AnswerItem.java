@@ -29,7 +29,7 @@ public class AnswerItem {
     private Long answerId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_fk")
+	@JoinColumn(name = "user_fk", nullable = false)
 	@JsonBackReference
     private UserItem user;
 

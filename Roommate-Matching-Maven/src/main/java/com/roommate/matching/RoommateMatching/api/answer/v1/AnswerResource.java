@@ -1,5 +1,7 @@
 package com.roommate.matching.RoommateMatching.api.answer.v1;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class AnswerResource {
 
     @ResponseBody
     @RequestMapping(value = "/get", params = "email")
-    public AnswerItem getAnswerByUsername(
+    public List<AnswerItem> getAnswerByUsername(
         @RequestParam(value = "email") final String email) {
         return service.findAnswerByEmail(email);
     }

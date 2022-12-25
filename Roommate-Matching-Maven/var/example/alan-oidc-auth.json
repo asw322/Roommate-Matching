@@ -1,0 +1,240 @@
+{
+    "authorities": [
+        {
+            "authority": "OIDC_USER",
+            "attributes": {
+                "at_hash": "uyi9LxauVxtrekT7xEa7mg",
+                "sub": "105878947492925586179",
+                "email_verified": true,
+                "iss": "https://accounts.google.com",
+                "given_name": "Alan",
+                "locale": "en",
+                "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+                "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+                "aud": [
+                    "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+                ],
+                "azp": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+                "name": "Alan Wang",
+                "exp": "2022-12-24T21:42:01Z",
+                "family_name": "Wang",
+                "iat": "2022-12-24T20:42:01Z",
+                "email": "alanwang53@gmail.com"
+            },
+            "idToken": {
+                "tokenValue": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyYTYxZWZkMmE0NGZjMjE1MTQ4ZDRlZmZjMzRkNmE3YjJhYzI2ZjAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMTYzMDEyNTY1Mzcta3Bmc3U5b3NmaHVxaXQ4bnJpOWdyOHZubjVmcWk3OTcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzMTYzMDEyNTY1Mzcta3Bmc3U5b3NmaHVxaXQ4bnJpOWdyOHZubjVmcWk3OTcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU4Nzg5NDc0OTI5MjU1ODYxNzkiLCJlbWFpbCI6ImFsYW53YW5nNTNAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ1eWk5THhhdVZ4dHJla1Q3eEVhN21nIiwibm9uY2UiOiJ2ZkVHdVdIaW5KM3ZUbVdFOTVfVlVUNXpEQUJsYUtpZjRnSnJKbTNaWko0IiwibmFtZSI6IkFsYW4gV2FuZyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BRWRGVHA3bksxM1BlcGJwbmdCUjNfZzNqMmhmamNLTXoxeXVMX1RMSHpaSTZnPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkFsYW4iLCJmYW1pbHlfbmFtZSI6IldhbmciLCJsb2NhbGUiOiJlbiIsImlhdCI6MTY3MTkxNDUyMSwiZXhwIjoxNjcxOTE4MTIxfQ.MqNx5HBOVyvmgEgqHnTBU6NzKYx222mAZACUvl7rhiaEFhWoT4m-AuDRLAuR2cg1mAEhQK9UaMkk1x1JJ61kZEp5gy6jM5poKO_xcu7mVVdgVD50Hhcq25DnGVnkKpoFph9lchPrnT4caPUjPa3Z0Gv0EqOnKyknnpjPucf40qz9q_EftMxp9EO0sq7n-KMo-f6IBfEz_cfwQlWP4-3YEGPeLl26J4g3U_GB5175mNXsa4d1efAitIPk7KMGPUdmZwUVjmc3y8S1osaPN2i_JniM4ZfwSu3rTZZ_JT5FGjNoNySXj5whXgIQXhmAEOmSeYaZ0meC--aGYV9eBjpBjA",
+                "issuedAt": "2022-12-24T20:42:01Z",
+                "expiresAt": "2022-12-24T21:42:01Z",
+                "claims": {
+                    "at_hash": "uyi9LxauVxtrekT7xEa7mg",
+                    "sub": "105878947492925586179",
+                    "email_verified": true,
+                    "iss": "https://accounts.google.com",
+                    "given_name": "Alan",
+                    "locale": "en",
+                    "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+                    "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+                    "aud": [
+                        "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+                    ],
+                    "azp": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+                    "name": "Alan Wang",
+                    "exp": "2022-12-24T21:42:01Z",
+                    "family_name": "Wang",
+                    "iat": "2022-12-24T20:42:01Z",
+                    "email": "alanwang53@gmail.com"
+                },
+                "audience": [
+                    "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+                ],
+                "authenticatedAt": null,
+                "authenticationMethods": null,
+                "authorizedParty": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+                "accessTokenHash": "uyi9LxauVxtrekT7xEa7mg",
+                "authorizationCodeHash": null,
+                "subject": "105878947492925586179",
+                "authenticationContextClass": null,
+                "issuer": "https://accounts.google.com",
+                "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+                "address": {
+                    "formatted": null,
+                    "streetAddress": null,
+                    "locality": null,
+                    "region": null,
+                    "postalCode": null,
+                    "country": null
+                },
+                "locale": "en",
+                "fullName": "Alan Wang",
+                "zoneInfo": null,
+                "givenName": "Alan",
+                "familyName": "Wang",
+                "middleName": null,
+                "nickName": null,
+                "preferredUsername": null,
+                "emailVerified": true,
+                "birthdate": null,
+                "phoneNumber": null,
+                "phoneNumberVerified": null,
+                "updatedAt": null,
+                "email": "alanwang53@gmail.com",
+                "profile": null,
+                "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+                "website": null,
+                "gender": null
+            },
+            "userInfo": null
+        },
+        {
+            "authority": "SCOPE_https://www.googleapis.com/auth/userinfo.email"
+        },
+        {
+            "authority": "SCOPE_https://www.googleapis.com/auth/userinfo.profile"
+        },
+        {
+            "authority": "SCOPE_openid"
+        }
+    ],
+    "attributes": {
+        "at_hash": "uyi9LxauVxtrekT7xEa7mg",
+        "sub": "105878947492925586179",
+        "email_verified": true,
+        "iss": "https://accounts.google.com",
+        "given_name": "Alan",
+        "locale": "en",
+        "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+        "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+        "aud": [
+            "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+        ],
+        "azp": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+        "name": "Alan Wang",
+        "exp": "2022-12-24T21:42:01Z",
+        "family_name": "Wang",
+        "iat": "2022-12-24T20:42:01Z",
+        "email": "alanwang53@gmail.com"
+    },
+    "idToken": {
+        "tokenValue": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyYTYxZWZkMmE0NGZjMjE1MTQ4ZDRlZmZjMzRkNmE3YjJhYzI2ZjAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMTYzMDEyNTY1Mzcta3Bmc3U5b3NmaHVxaXQ4bnJpOWdyOHZubjVmcWk3OTcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzMTYzMDEyNTY1Mzcta3Bmc3U5b3NmaHVxaXQ4bnJpOWdyOHZubjVmcWk3OTcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDU4Nzg5NDc0OTI5MjU1ODYxNzkiLCJlbWFpbCI6ImFsYW53YW5nNTNAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ1eWk5THhhdVZ4dHJla1Q3eEVhN21nIiwibm9uY2UiOiJ2ZkVHdVdIaW5KM3ZUbVdFOTVfVlVUNXpEQUJsYUtpZjRnSnJKbTNaWko0IiwibmFtZSI6IkFsYW4gV2FuZyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BRWRGVHA3bksxM1BlcGJwbmdCUjNfZzNqMmhmamNLTXoxeXVMX1RMSHpaSTZnPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkFsYW4iLCJmYW1pbHlfbmFtZSI6IldhbmciLCJsb2NhbGUiOiJlbiIsImlhdCI6MTY3MTkxNDUyMSwiZXhwIjoxNjcxOTE4MTIxfQ.MqNx5HBOVyvmgEgqHnTBU6NzKYx222mAZACUvl7rhiaEFhWoT4m-AuDRLAuR2cg1mAEhQK9UaMkk1x1JJ61kZEp5gy6jM5poKO_xcu7mVVdgVD50Hhcq25DnGVnkKpoFph9lchPrnT4caPUjPa3Z0Gv0EqOnKyknnpjPucf40qz9q_EftMxp9EO0sq7n-KMo-f6IBfEz_cfwQlWP4-3YEGPeLl26J4g3U_GB5175mNXsa4d1efAitIPk7KMGPUdmZwUVjmc3y8S1osaPN2i_JniM4ZfwSu3rTZZ_JT5FGjNoNySXj5whXgIQXhmAEOmSeYaZ0meC--aGYV9eBjpBjA",
+        "issuedAt": "2022-12-24T20:42:01Z",
+        "expiresAt": "2022-12-24T21:42:01Z",
+        "claims": {
+            "at_hash": "uyi9LxauVxtrekT7xEa7mg",
+            "sub": "105878947492925586179",
+            "email_verified": true,
+            "iss": "https://accounts.google.com",
+            "given_name": "Alan",
+            "locale": "en",
+            "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+            "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+            "aud": [
+                "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+            ],
+            "azp": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+            "name": "Alan Wang",
+            "exp": "2022-12-24T21:42:01Z",
+            "family_name": "Wang",
+            "iat": "2022-12-24T20:42:01Z",
+            "email": "alanwang53@gmail.com"
+        },
+        "audience": [
+            "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+        ],
+        "authenticatedAt": null,
+        "authenticationMethods": null,
+        "authorizedParty": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+        "accessTokenHash": "uyi9LxauVxtrekT7xEa7mg",
+        "authorizationCodeHash": null,
+        "subject": "105878947492925586179",
+        "authenticationContextClass": null,
+        "issuer": "https://accounts.google.com",
+        "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+        "address": {
+            "formatted": null,
+            "streetAddress": null,
+            "locality": null,
+            "region": null,
+            "postalCode": null,
+            "country": null
+        },
+        "locale": "en",
+        "fullName": "Alan Wang",
+        "zoneInfo": null,
+        "givenName": "Alan",
+        "familyName": "Wang",
+        "middleName": null,
+        "nickName": null,
+        "preferredUsername": null,
+        "emailVerified": true,
+        "birthdate": null,
+        "phoneNumber": null,
+        "phoneNumberVerified": null,
+        "updatedAt": null,
+        "email": "alanwang53@gmail.com",
+        "profile": null,
+        "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+        "website": null,
+        "gender": null
+    },
+    "userInfo": null,
+    "claims": {
+        "at_hash": "uyi9LxauVxtrekT7xEa7mg",
+        "sub": "105878947492925586179",
+        "email_verified": true,
+        "iss": "https://accounts.google.com",
+        "given_name": "Alan",
+        "locale": "en",
+        "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+        "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+        "aud": [
+            "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+        ],
+        "azp": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+        "name": "Alan Wang",
+        "exp": "2022-12-24T21:42:01Z",
+        "family_name": "Wang",
+        "iat": "2022-12-24T20:42:01Z",
+        "email": "alanwang53@gmail.com"
+    },
+    "name": "105878947492925586179",
+    "expiresAt": "2022-12-24T21:42:01Z",
+    "issuedAt": "2022-12-24T20:42:01Z",
+    "audience": [
+        "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com"
+    ],
+    "authenticatedAt": null,
+    "authenticationMethods": null,
+    "authorizedParty": "316301256537-kpfsu9osfhuqit8nri9gr8vnn5fqi797.apps.googleusercontent.com",
+    "accessTokenHash": "uyi9LxauVxtrekT7xEa7mg",
+    "authorizationCodeHash": null,
+    "subject": "105878947492925586179",
+    "authenticationContextClass": null,
+    "issuer": "https://accounts.google.com",
+    "nonce": "vfEGuWHinJ3vTmWE95_VUT5zDABlaKif4gJrJm3ZZJ4",
+    "address": {
+        "formatted": null,
+        "streetAddress": null,
+        "locality": null,
+        "region": null,
+        "postalCode": null,
+        "country": null
+    },
+    "locale": "en",
+    "fullName": "Alan Wang",
+    "zoneInfo": null,
+    "givenName": "Alan",
+    "familyName": "Wang",
+    "middleName": null,
+    "nickName": null,
+    "preferredUsername": null,
+    "emailVerified": true,
+    "birthdate": null,
+    "phoneNumber": null,
+    "phoneNumberVerified": null,
+    "updatedAt": null,
+    "email": "alanwang53@gmail.com",
+    "profile": null,
+    "picture": "https://lh3.googleusercontent.com/a/AEdFTp7nK13PepbpngBR3_g3j2hfjcKMz1yuL_TLHzZI6g=s96-c",
+    "website": null,
+    "gender": null
+}

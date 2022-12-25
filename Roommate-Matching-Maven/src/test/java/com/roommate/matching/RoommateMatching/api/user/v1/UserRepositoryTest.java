@@ -3,6 +3,8 @@ package com.roommate.matching.RoommateMatching.api.user.v1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,14 @@ public class UserRepositoryTest {
 
     @Test
     public void test() {
+        final String uuid = UUID.randomUUID().toString();
         final UserItem insertItem = new UserItem();
-        insertItem.setEmail("alanwang53@gmail.com");
+        insertItem.setEmail("alanwang53@gmail.com-" + uuid);
         insertItem.setPassword("1234");
         insertItem.setFirstName("Alan");
         insertItem.setLastName("Wang");
         userRepository.save(insertItem);
-        Optional<UserItem> optional = userRepository.findByEmail("alanwang53@gmail.com");
+        Optional<UserItem> optional = userRepository.findByEmail("alanwang53@gmail.com-" + uuid);
         UserItem foundItem = optional.get();
         assertNotNull(foundItem);
         assertEquals(insertItem.toString(), foundItem.toString());

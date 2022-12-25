@@ -80,6 +80,6 @@ public class SurveyQuestionItem {
 
     @Override
 	public String toString() {
-		return Stream.of(String.valueOf(surveyQuestionId), survey.toString(), question.toString(), answer.toString()).collect(Collectors.joining("-"));
+		return Stream.of(String.valueOf(surveyQuestionId), survey.toString(), question.toString()).collect(Collectors.joining("-"));
 	}
 }

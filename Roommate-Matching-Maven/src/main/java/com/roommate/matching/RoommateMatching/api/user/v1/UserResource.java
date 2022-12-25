@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +20,21 @@ public class UserResource {
     @Autowired
     private UserContainerService service;
     
-    // Eventually replace with oidc
+    @ResponseBody
+    @RequestMapping(value = "/oidc-principal")
+    public OidcUser getOidcUserPrincipal(
+        @AuthenticationPrincipal OidcUser principal) {
+        return principal;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/set-oidc-token")
+    public void setOidcToken(
+        @AuthenticationPrincipal OidcUser principal) {
+        final UserItem user = service.findUserByEmail(principal.getEmail()).get();
+        service.setUserOidcToken(user.getId(), principal.getAttribute("at_hash"));
+    }
+
     @ResponseBody
     @RequestMapping(value = "/login", params = "username")
     public String loginWithUsername(

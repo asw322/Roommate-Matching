@@ -18,4 +18,8 @@ public interface UserRepository extends JpaRepository<UserItem, Long> {
 	@Modifying(flushAutomatically = true)
 	@Query("update UserItem u set u.firstName = ?2, u.lastName = ?3 where u.id = ?1")
 	void setUserInfoById(final Long id, final String firstName, final String lastName);
+
+	@Modifying(flushAutomatically = true)
+	@Query("update UserItem u set u.oidcToken = ?2 where u.id = ?1")
+	void setUserOidcToken(final Long id, final String oidcToken);
 }

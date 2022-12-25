@@ -1,5 +1,7 @@
 package com.roommate.matching.RoommateMatching.api.answer.v1;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,16 +45,12 @@ public class AnswerContainerService {
         return optional.isPresent() ? optional.get() : null;
     }
 
-    public AnswerItem findAnswerByEmail(final String email) {
+    public List<AnswerItem> findAnswerByEmail(final String email) {
         Optional<UserItem> userOptional = userContainerService.findUserByEmail(email);
         if (!userOptional.isPresent()) {
             return null;
         }
-        final Optional<AnswerItem> result = answerRepository.findByUser(userOptional.get());
-        System.out.println(result);
-        if (!result.isPresent()) {
-            return null;
-        }
-        return result.get();
+        final List<AnswerItem> result = answerRepository.findByUser(userOptional.get());
+        return result;
     }
 }

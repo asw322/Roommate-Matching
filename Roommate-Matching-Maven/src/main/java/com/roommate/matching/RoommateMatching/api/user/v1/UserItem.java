@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -55,10 +56,21 @@ public class UserItem {
 	@Column(name = "resetToken")
 	private String resetToken;
 
+	@Column(name = "oidcToken")
+	private String oidcToken;
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@Column(nullable = true)
 	@JsonManagedReference
 	private Set<AnswerItem> answer;
+
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private UserLocationItem userLocation;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@Column(nullable = true)
+	@JsonManagedReference
+	private Set<UserPreferredLocationItem> userPreferredLocation;
 
 	public Long getId() {
 		return userId;
@@ -132,16 +144,40 @@ public class UserItem {
 		this.resetToken = resetToken;
 	}
 
-	public Set<AnswerItem> getAnswerItem() {
+	public String getOidcToken() {
+		return oidcToken;
+	}
+
+	public void setOidcToken(final String oidcToken) {
+		this.oidcToken = oidcToken;
+	}
+
+	public Set<AnswerItem> getAnswer() {
 		return answer;
 	}
 
 	public void setAnswer(final Set<AnswerItem> answer) {
 		this.answer = answer;
-	} 
+	}
+
+	public UserLocationItem getUserLocation() {
+		return userLocation;
+	}
+
+	public void setUserLocation(final UserLocationItem userLocation) {
+		this.userLocation = userLocation;
+	}
+
+	public Set<UserPreferredLocationItem> getUserPreferredLocation() {
+		return userPreferredLocation;
+	}
+
+	public void setUserPreferredLocation(final Set<UserPreferredLocationItem> userPreferredLocation) {
+		this.userPreferredLocation = userPreferredLocation;
+	}
 
 	@Override
 	public String toString() {
-		return Stream.of(String.valueOf(userId), email, password, firstName, lastName).collect(Collectors.joining("-"));
+		return Stream.of(String.valueOf(userId), email, password, firstName, lastName, userLocation.toString()).collect(Collectors.joining("-"));
 	}
 }

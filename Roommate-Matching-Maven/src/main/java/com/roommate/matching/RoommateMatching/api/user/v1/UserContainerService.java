@@ -25,6 +25,9 @@ public class UserContainerService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserPreferredLocationRepository userPreferredLocationRepository;
+
+    @Autowired
     private JavaMailSender mailSender;
 
     @Value("${roommate.matching.server.url}")
@@ -52,7 +55,7 @@ public class UserContainerService {
         final String token = UUID.randomUUID().toString();
         UserItem user = userOptional.get();
         user.setResetToken(token);
-        save(user);
+        userRepository.save(user);
 
         final String verificationLink = new StringBuilder().append(serverUrl).append("/api/v1/verify").append(token).toString();
 
@@ -74,8 +77,9 @@ public class UserContainerService {
         if(Strings.isNullOrEmpty(parameters.get("email")) ||
            Strings.isNullOrEmpty(parameters.get("pass")) ||
            Strings.isNullOrEmpty(parameters.get("firstname")) || 
-           Strings.isNullOrEmpty(parameters.get("lastname"))) {
-            return "Missing required params (email, pass, firstname, lastname)";
+           Strings.isNullOrEmpty(parameters.get("lastname")) ||
+           Strings.isNullOrEmpty(parameters.get("preferredlocation"))) {
+            return "Missing required params (email, pass, firstname, lastname, preferredlocation)";
         }
 
         Optional<UserItem> userExistOptional = userRepository.findByEmail(parameters.get("email"));
@@ -89,15 +93,30 @@ public class UserContainerService {
         insertItem.setFirstName(parameters.get("firstname"));
         insertItem.setLastName(parameters.get("lastname"));
         insertItem.setEnabled(true);
-        save(insertItem);
+        userRepository.save(insertItem);
+
+        if(!Strings.isNullOrEmpty(parameters.get("address"))) {
+            setUserLocation(parameters.get("address"));
+        }
+
+
         return "User created";
+    }
+
+    public void setUserLocation(final String address) {
+        // googe maps api geocoding "address" => (lat, lng)
+        // store into UserLocationItem
+    }
+
+    public void setUserPreferredLocation(final String location) {
+        // TODO: use new repository to create a new object; test
     }
 
     public void setUserInfoById(final Long id, final String firstName, final String lastName) {
         userRepository.setUserInfoById(id, firstName, lastName);
     }
 
-    public void save(final UserItem user) {
-        userRepository.save(user);
+    public void setUserOidcToken(final Long id, final String oidcToken) {
+        userRepository.setUserOidcToken(id, oidcToken);
     }
 }
