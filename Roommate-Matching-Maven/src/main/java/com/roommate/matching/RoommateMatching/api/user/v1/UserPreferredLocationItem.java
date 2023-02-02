@@ -3,6 +3,7 @@ package com.roommate.matching.RoommateMatching.api.user.v1;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ public class UserPreferredLocationItem {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_fk", nullable = false)
+	@JsonBackReference
     private UserItem user;
 
     @Column(name = "location")

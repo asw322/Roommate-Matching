@@ -9,21 +9,21 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.roommate.matching</groupId>
-	<artifactId>Roommate-Matching</artifactId>
+	<artifactId>roommate-matching</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Roommate-Matching</name>
 	<description>Roommate Matching Service</description>
 	<properties>
 		<container.image.binary>roommate-matching-${project.version}.jar</container.image.binary>
-		<container.image.healthcheck.url>http://localhost:${container.image.port}${healthcheck.uri}</container.image.healthcheck.url>
+<!--		<container.image.healthcheck.url>http://localhost:${container.image.port}${healthcheck.uri}</container.image.healthcheck.url>-->
 		<container.image.dir>/app</container.image.dir>
 		<healthcheck.uri>/</healthcheck.uri>
-		<container.image.port>${roommate.matching.server.http.port}</container.image.port>
+<!--		<container.image.port>${roommate.matching.server.http.port}</container.image.port>-->
 		
 		<!-- TODO: need to define these, reference parent pom -->
-		<container.image.java.args>${java.heap.args} ${java.gc.args}</container.image.java.args>
-		<container.image.to></container.image.to>
-		<container.image.from></container.image.from>
+<!--		<container.image.java.args>${java.heap.args} ${java.gc.args}</container.image.java.args>-->
+<!--		<container.image.to></container.image.to>-->
+<!--		<container.image.from></container.image.from>-->
 		
 		<java.version>8</java.version>
 
@@ -42,11 +42,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -81,6 +76,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<version>3.0.0</version>
 			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
@@ -206,6 +202,35 @@
 			<version>1.1.4c</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson-spring-boot-starter</artifactId>
+			<version>3.19.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.19.1</version>
+			<exclusions>
+				<exclusion>
+					<!-- TODO: FIGURE OUT 
+					HOW TO RESOLVE ISSUES WITH KRYO
+					METHODS
+					1. EXCLUDE KRYO
+					2. DOWNGRADE TO PREVIOUS VERSION OF KRYO
+					3. INCLUDE KRYO; FIX CIRCULAR DEPENDENCY -->
+					<groupId>com.esotericsoftware</groupId>
+					<artifactId>kryo</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>5.1.0</version>
+		</dependency>
 
 	</dependencies>
 
@@ -216,128 +241,135 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>4{version.docker-maven-plugin}</version>
-				<configuration>
-					<showLogs>true</showLogs>
-					<images>
-						<image>
-							<alias>service</alias>
-							<name></name>
-							<build>
-								<from></from>
-								<healthCheck>
-									<interval>1s</interval>
-									<timeout>3s</timeout>
-									<startPeriod>1m</startPeriod>
-									<retries>3</retries>
-									<!-- TODO: Address the redirect and replace with grep 200 -->
-									<cmd>curl -w '%{http_code}' ${container.image.healthcheck.url} | grep 302 || exit 1</cmd>
-								</healthCheck>
-								<cmd>
-									<shell>java ${JAVA_PROXY_ARGS} -jar ${container.image.java.args} ${container.image.dir}/${container.image.binary}</shell>
-								</cmd>
-								<tags>
-									<tag>latest</tag>
-									<tag>${project.version}</tag>
-								</tags>
-								<labels>
-									<org.opencontainers.image.created>${maven.build.timestamp}</org.opencontainers.image.created>
-                                    <org.opencontainers.image.url>${scm.url.http}</org.opencontainers.image.url>
-                                    <org.opencontainers.image.source>${scm.url.connection}</org.opencontainers.image.source>
-                                    <org.opencontainers.image.version>${project.version}</org.opencontainers.image.version>
-                                    <org.opencontainers.image.title>${project.name}</org.opencontainers.image.title>
-                                    <org.opencontainers.image.description>${project.description}</org.opencontainers.image.description>
-                                    <org.opencontainers.image.licenses>${parameter.license}</org.opencontainers.image.licenses>
-								</labels>
-								<env>
-									<JAVA_PROXY_ARGS>-Dhttp.nonProxyHosts=''</JAVA_PROXY_ARGS>
-								</env>
-								<ports>
-									<port>${container.image.port}/tcp</port>
-								</ports>
-								<workdir>${container.image.dir}</workdir>
-								<assembly>
-									<name>app</name>
-									<descriptorRef>artifact-with-dependencies</descriptorRef>
-								</assembly>
-							</build>
-						</image>
-					</images>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build</id>
-						<goals>
-							<goal>build</goal>
-						</goals>
-						<phase>compile</phase>
-					</execution>
-					<execution>
-						<id>push</id>
-						<goals>
-							<goal>push</goal>
-						</goals>
-						<phase>deploy</phase>
-					</execution>
-					<execution>
-						<id>start</id>
-						<goals>
-							<goal>start</goal>
-						</goals>
-						<phase>pre-integration-test</phase>
-					</execution>
-					<execution>
-						<id>stop</id>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-						<phase>post-integration-test</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-remote-resources-plugin</artifactId>
-                <version>1.7.0</version>
-				<configuration>
-					<resourceBundles>
-						<resourceBundle>com.roommate.matching:${project.artifactId}:${project.version}</resourceBundle>
-					</resourceBundles>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>process</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>${version.properties-maven-plugin}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<phase>process-resources</phase>
-						<configuration>
-							<files>
-								<!-- TODO: this might not work -->
-								<!-- <file>${project.build.directory}/project.build.directory/application.properties</file> -->
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>io.fabric8</groupId>-->
+<!--				<artifactId>docker-maven-plugin</artifactId>-->
+<!--				<version>${version.docker-maven-plugin}</version>-->
+<!--				<configuration>-->
+<!--					<showLogs>true</showLogs>-->
+<!--					<images>-->
+<!--						<image>-->
+<!--							<alias>service</alias>-->
+<!--							<name></name>-->
+<!--							<build>-->
+<!--								<from></from>-->
+<!--								<healthCheck>-->
+<!--									<interval>1s</interval>-->
+<!--									<timeout>3s</timeout>-->
+<!--									<startPeriod>1m</startPeriod>-->
+<!--									<retries>3</retries>-->
+<!--									&lt;!&ndash; TODO: Address the redirect and replace with grep 200 &ndash;&gt;-->
+<!--									<cmd>curl -w '%{http_code}' ${container.image.healthcheck.url} | grep 302 || exit 1</cmd>-->
+<!--								</healthCheck>-->
+<!--								<cmd>-->
+<!--									<shell>java ${JAVA_PROXY_ARGS} -jar ${container.image.java.args} ${container.image.dir}/${container.image.binary}</shell>-->
+<!--								</cmd>-->
+<!--								<tags>-->
+<!--									<tag>latest</tag>-->
+<!--									<tag>${project.version}</tag>-->
+<!--								</tags>-->
+<!--								<labels>-->
+<!--									<org.opencontainers.image.created>${maven.build.timestamp}</org.opencontainers.image.created>-->
+<!--                                    <org.opencontainers.image.url>${scm.url.http}</org.opencontainers.image.url>-->
+<!--                                    <org.opencontainers.image.source>${scm.url.connection}</org.opencontainers.image.source>-->
+<!--                                    <org.opencontainers.image.version>${project.version}</org.opencontainers.image.version>-->
+<!--                                    <org.opencontainers.image.title>${project.name}</org.opencontainers.image.title>-->
+<!--                                    <org.opencontainers.image.description>${project.description}</org.opencontainers.image.description>-->
+<!--                                    <org.opencontainers.image.licenses>${parameter.license}</org.opencontainers.image.licenses>-->
+<!--								</labels>-->
+<!--								<env>-->
+<!--									<JAVA_PROXY_ARGS>-Dhttp.nonProxyHosts=''</JAVA_PROXY_ARGS>-->
+<!--								</env>-->
+<!--								<ports>-->
+<!--									<port>${container.image.port}/tcp</port>-->
+<!--								</ports>-->
+<!--								<workdir>${container.image.dir}</workdir>-->
+<!--								<assembly>-->
+<!--									<name>app</name>-->
+<!--									<descriptorRef>artifact-with-dependencies</descriptorRef>-->
+<!--								</assembly>-->
+<!--							</build>-->
+<!--						</image>-->
+<!--					</images>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>build</id>-->
+<!--						<goals>-->
+<!--							<goal>build</goal>-->
+<!--						</goals>-->
+<!--						<phase>compile</phase>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>push</id>-->
+<!--						<goals>-->
+<!--							<goal>push</goal>-->
+<!--						</goals>-->
+<!--						<phase>deploy</phase>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>start</id>-->
+<!--						<goals>-->
+<!--							<goal>start</goal>-->
+<!--						</goals>-->
+<!--						<phase>pre-integration-test</phase>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>stop</id>-->
+<!--						<goals>-->
+<!--							<goal>stop</goal>-->
+<!--						</goals>-->
+<!--						<phase>post-integration-test</phase>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-remote-resources-plugin</artifactId>-->
+<!--                <version>1.7.0</version>-->
+<!--				<configuration>-->
+<!--					<resourceBundles>-->
+<!--						<resourceBundle>com.roommate.matching:${project.artifactId}:${project.version}</resourceBundle>-->
+<!--					</resourceBundles>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>process</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>properties-maven-plugin</artifactId>-->
+<!--                <version>${version.properties-maven-plugin}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>read-project-properties</goal>-->
+<!--						</goals>-->
+<!--						<phase>process-resources</phase>-->
+<!--						<configuration>-->
+<!--							<files>-->
+<!--								&lt;!&ndash; TODO: this might not work &ndash;&gt;-->
+<!--								&lt;!&ndash; <file>${project.build.directory}/project.build.directory/application.properties</file> &ndash;&gt;-->
+<!--							</files>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
 	<developers>
+		<developer>
+			<name>Alex Cubbage</name>
+			<email>abc224@lehigh.edu</email>
+			<roles>
+				<role>Product Owner</role>
+			</roles>
+		</developer>
 		<developer>
 			<name>Alan Wang</name>
 			<email>alanwang53@gmail.com</email>

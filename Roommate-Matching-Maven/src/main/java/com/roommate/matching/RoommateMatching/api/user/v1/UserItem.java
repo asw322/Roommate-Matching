@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.roommate.matching.RoommateMatching.api.answer.v1.AnswerItem;
 
+import com.roommate.matching.RoommateMatching.api.usermatch.v1.UserMatchItem;
+import com.roommate.matching.RoommateMatching.api.usermatch.v1.UserMatchTransactionItem;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,6 +74,16 @@ public class UserItem {
 	@Column(nullable = true)
 	@JsonManagedReference
 	private Set<UserPreferredLocationItem> userPreferredLocation;
+
+	@OneToMany(mappedBy = "currentUser", cascade = CascadeType.ALL)
+	@Column(nullable = true)
+	@JsonManagedReference
+	private Set<UserMatchItem> userMatches;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@Column(nullable = true)
+	@JsonManagedReference
+	private Set<UserMatchTransactionItem> userMatchTransactions;
 
 	public Long getId() {
 		return userId;
@@ -174,6 +187,22 @@ public class UserItem {
 
 	public void setUserPreferredLocation(final Set<UserPreferredLocationItem> userPreferredLocation) {
 		this.userPreferredLocation = userPreferredLocation;
+	}
+
+	public Set<UserMatchItem> getUserMatches() {
+		return userMatches;
+	}
+
+	public void setUserMatches(final Set<UserMatchItem> userMatches) {
+		this.userMatches = userMatches;
+	}
+
+	public Set<UserMatchTransactionItem> getUserMatchTransactions() {
+		return userMatchTransactions;
+	}
+
+	public void setUserMatchTransactions(final Set<UserMatchTransactionItem> userMatchTransactions) {
+		this.userMatchTransactions = userMatchTransactions;
 	}
 
 	@Override

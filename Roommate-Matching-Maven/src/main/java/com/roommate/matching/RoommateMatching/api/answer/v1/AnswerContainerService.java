@@ -27,7 +27,7 @@ public class AnswerContainerService {
 
     public AnswerItem createAnswerByEmail(final String email, final Long surveyQuestionId, final String data, final AnswerType type) {
 
-        UserItem user = userUtil.getUser(email);
+        final UserItem user = userUtil.getUser(email);
         
         final SurveyQuestionItem surveyQuestion = surveyQuestionContainerService.findById(surveyQuestionId);
         final AnswerItem answer = new AnswerItem();
@@ -45,14 +45,14 @@ public class AnswerContainerService {
     }
 
     public List<AnswerItem> findAnswerByEmail(final String email) {
-        UserItem user = userUtil.getUser(email);
+        final UserItem user = userUtil.getUser(email);
         
         final List<AnswerItem> result = answerRepository.findByUser(user);
         return result;
     }
 
     public List<AnswerItem> findAnswerByAnswerType(final Long id, final AnswerType type) {
-        UserItem user = userUtil.getUser(id);
+        final UserItem user = userUtil.getUser(id);
         return answerRepository.findByUserAndType(user, type);
     }
 }

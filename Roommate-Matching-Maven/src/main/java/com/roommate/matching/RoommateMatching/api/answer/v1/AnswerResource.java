@@ -31,7 +31,7 @@ public class AnswerResource {
 
     @ResponseBody
     @RequestMapping(value = "/get", params = "email")
-    public List<AnswerItem> getAnswerByUsername(
+    public List<AnswerItem> getAnswerByEmail(
         @RequestParam(value = "email") final String email) {
         return service.findAnswerByEmail(email);
     }
