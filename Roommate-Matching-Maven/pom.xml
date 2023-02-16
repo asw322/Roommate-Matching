@@ -212,19 +212,27 @@
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
 			<version>3.19.1</version>
-			<exclusions>
-				<exclusion>
-					<!-- TODO: FIGURE OUT 
-					HOW TO RESOLVE ISSUES WITH KRYO
-					METHODS
-					1. EXCLUDE KRYO
-					2. DOWNGRADE TO PREVIOUS VERSION OF KRYO
-					3. INCLUDE KRYO; FIX CIRCULAR DEPENDENCY -->
-					<groupId>com.esotericsoftware</groupId>
-					<artifactId>kryo</artifactId>
-				</exclusion>
-			</exclusions>
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					&lt;!&ndash; TODO: FIGURE OUT -->
+<!--					HOW TO RESOLVE ISSUES WITH KRYO-->
+<!--					METHODS-->
+<!--					1. EXCLUDE KRYO-->
+<!--					2. DOWNGRADE TO PREVIOUS VERSION OF KRYO-->
+<!--					3. INCLUDE KRYO; FIX CIRCULAR DEPENDENCY &ndash;&gt;-->
+<!--					<groupId>com.esotericsoftware</groupId>-->
+<!--					<artifactId>kryo</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.esotericsoftware/kryo -->
+<!--		<dependency>-->
+<!--			<groupId>com.esotericsoftware</groupId>-->
+<!--			<artifactId>kryo</artifactId>-->
+<!--			<version>4.0.0</version>-->
+<!--		</dependency>-->
+
 
 		<dependency>
 			<groupId>com.google.inject</groupId>
