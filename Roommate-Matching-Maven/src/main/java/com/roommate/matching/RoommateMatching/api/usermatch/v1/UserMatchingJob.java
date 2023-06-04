@@ -9,7 +9,7 @@ import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
 import com.roommate.matching.RoommateMatching.api.usermatch.v1.operations.UserMatchingOpertions;
 import com.roommate.matching.RoommateMatching.modules.RedissonClientProvider;
 
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RSetCache;

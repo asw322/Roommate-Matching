@@ -8,7 +8,7 @@ import com.roommate.matching.RoommateMatching.api.question.v1.QuestionItem;
 import com.roommate.matching.RoommateMatching.api.survey.v1.SurveyContainerService;
 import com.roommate.matching.RoommateMatching.api.survey.v1.SurveyItem;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service("surveyQuestionContainerService")
 @Transactional

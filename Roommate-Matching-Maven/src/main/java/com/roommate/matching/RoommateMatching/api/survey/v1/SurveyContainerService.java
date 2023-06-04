@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Strings;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service("surveyContainerService")
 @Transactional

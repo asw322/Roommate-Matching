@@ -2,7 +2,7 @@ package com.roommate.matching.RoommateMatching.api.usermatch.v1;
 
 import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
 import com.roommate.matching.RoommateMatching.api.user.v1.UserUtil;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

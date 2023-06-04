@@ -12,7 +12,7 @@ import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
 import com.roommate.matching.RoommateMatching.api.user.v1.UserUtil;
 import com.roommate.matching.RoommateMatching.modules.RedissonClientProvider;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service("userMatchTransactionContainerService")
 @Transactional

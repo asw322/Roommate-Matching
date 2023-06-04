@@ -2,14 +2,23 @@ package com.roommate.matching.RoommateMatching.api.usermatch.v1;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "userMatch")

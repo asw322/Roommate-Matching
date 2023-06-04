@@ -13,7 +13,7 @@ import com.roommate.matching.RoommateMatching.api.user.v1.UserContainerService;
 import com.roommate.matching.RoommateMatching.api.user.v1.UserItem;
 import com.roommate.matching.RoommateMatching.api.user.v1.UserUtil;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service("answerContainerService")
 @Transactional
