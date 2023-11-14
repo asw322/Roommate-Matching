@@ -319,7 +319,7 @@ const EditUser = () => {
 										label='Phone'
 										variant='outlined'
 										style={{ marginBottom: 35 }}
-										defaultValue={'1-555-666-7070'}
+										defaultValue={''}
 										value={data?.phone || ''}
 
 										name='phone'
@@ -330,7 +330,7 @@ const EditUser = () => {
 										variant='outlined'
 										style={{ marginBottom: 35 }}
 										type={'email'}
-										defaultValue={'Jane@gmail.com'}
+										defaultValue={''}
 										value={data && data.email}
 										name='email'
 										onChange={handleChange}
