@@ -27,17 +27,18 @@ export default makeStyles(theme => ({
     }
   },
   logotypeImage: {
-    width: 165,
+    width: 500,
     marginBottom: theme.spacing(4)
   },
   logotypeText: {
-    color: "white",
-    fontWeight: 500,
-    fontSize: 84,
-    [theme.breakpoints.down("md")]: {
-      fontSize: 48
-    }
-  },
+	color: "white",
+	fontWeight: 500,
+	fontSize: 84,
+	fontFamily: "Scandia", // Set the font family to Scandia
+	[theme.breakpoints.down("md")]: {
+	  fontSize: 48
+	}
+  },  
   customFormContainer: {
     width: "40%",
     height: "100%",

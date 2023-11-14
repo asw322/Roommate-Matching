@@ -153,14 +153,6 @@ Roommate Matching
             <Typography variant="h4" weight="medium">
               {currentUser?.firstName}
             </Typography>
-            <Typography
-              className={classes.profileMenuLink}
-              component="a"
-              color="primary"
-              href="https://flatlogic.com"
-            >
-              Flatlogic.com
-            </Typography>
           </div>
           <MenuItem
             className={classNames(
@@ -169,7 +161,7 @@ Roommate Matching
             )}
           >
             <AccountIcon className={classes.profileMenuIcon} />
-            <Link to='/admin/user/edit' style={{ textDecoration: 'none' }}>
+            <Link to='/user/edit' style={{ textDecoration: 'none' }}>
               Profile
             </Link>
           </MenuItem>
