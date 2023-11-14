@@ -22,7 +22,7 @@ import Footer from '../Footer/Footer'
 import { Link } from '../Wrappers/Wrappers'
 import ColorChangeThemePopper from './components/ColorChangeThemePopper'
 
-import EditUser from '../../pages/user/EditUser';
+import EditUser from '../../pages/EditUser/EditUser';
 import Login from "../../pages/login/Login";
 
 // pages

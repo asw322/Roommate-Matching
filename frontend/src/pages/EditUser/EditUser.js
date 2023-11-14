@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, TextField } from '@mui/material';
+import { Grid, Box, TextField, Avatar } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useParams } from 'react-router';
@@ -15,13 +15,14 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import uuid from 'uuid/v4';
 
-import Widget from '../../components/Widget';
+import Widget from '../../components/Widget/Widget';
 import { Typography, Button } from '@mui/material';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import Ellipse1Image from './Dashboard_Ellipse_1.png';
 
 import {
 	useManagementDispatch,
@@ -58,6 +59,24 @@ const EditUser = () => {
 		setCurrentUser(managementValue.currentUser);
 	}, [managementDispatch, managementValue]);
 	const isAdmin = currentUser && currentUser.role === 'admin';
+	let isMissingRole = currentUser && currentUser.role === null;
+	let isMissingFirstName = currentUser && currentUser.firstName === null;
+	let isMissingLastName = currentUser && currentUser.lastName === null;
+	let isGoogleUser = currentUser && currentUser.provider === 'google';
+	let isMissingPronouns = currentUser && currentUser.pronouns === null;
+	//let isMissingPhone = currentUser && currentUser.Phone === null;
+	let isMissingBiography = currentUser && currentUser.biography === null;
+
+	// if (isMissingRole) {
+	// 	setData((prevData) => ({
+	// 		...prevData,
+	// 		role: 'user'
+	// 	}));
+	// 	handleSubmit();
+	// }
+
+	const [customPronouns, setCustomPronouns] = useState('');
+
 
 	function extractExtensionFrom(filename) {
 		if (!filename) {
@@ -139,7 +158,6 @@ const EditUser = () => {
 			data,
 			history,
 		)(managementDispatch);
-		showSnackbar({ type: 'success', message: 'User Edited' });
 	}
 
 	function handleUpdatePassword() {
@@ -177,11 +195,11 @@ const EditUser = () => {
 								icon={<PersonOutlineIcon />}
 								classes={{ wrapper: classes.icon }}
 							/>
-							<Tab
+							{!isGoogleUser && <Tab
 								label='CHANGE PASSWORD'
 								icon={<LockIcon />}
 								classes={{ wrapper: classes.icon }}
-							/>
+							/>}
 							<Tab
 								label='SETTINGS'
 								icon={<SettingsIcon />}
@@ -250,53 +268,136 @@ const EditUser = () => {
 												</div>
 											))
 											: null}
+											<Box sx={{ display: 'flex', justifyContent: 'center', width: 'min-content' }}>
 									</div> */}
-									<div className={classes.galleryWrap}>
-										{data && data.avatar && data.avatar.length !== 0
-											? data.avatar.map((avatar, idx) => (
-												<div className={classes.imgWrap} key={idx}>
-													{/* Overlay delete icon or text */}
-													<img
-														src={avatar.publicUrl}
-														alt='avatar'
-														height={'100%'}
-														style={{ maxWidth: '100%', display: 'block', margin: '0 auto' }}
-													/>
+									<Box display={'flex'} justifyContent={'center'}>
+										<Box display={'flex'} justifyContent={'left'} alignItems={'center'} style={{ marginBottom: 35 }}>
+											<div className={classes.galleryWrap}>
+												{data && data.avatar && data.avatar.length !== 0
+													? data.avatar.map((avatar, idx) => (
+														<div className={classes.imgWrap} key={idx}>
+															{/* Overlay delete icon or text */}
+															<img
+																src={avatar.publicUrl || currentUser.profilePicture}
+																alt='avatar'
+																height={'100%'}
+																style={{ maxWidth: '100%', display: 'block', margin: '0 auto' }}
+															/>
 
-													<span
-														onClick={() => deleteOneImage(avatar.id)}
-														style={{
-															display: 'block',
-															position: 'center',
-															top: '5px', right: '5px',
-															cursor: 'pointer',
-															color: 'red', zIndex: 2
-														}}
+															<span
+																onClick={() => deleteOneImage(avatar.id)}
+																style={{
+																	display: 'block',
+																	position: 'center',
+																	top: '5px', right: '5px',
+																	cursor: 'pointer',
+																	color: 'red', zIndex: 2
+																}}
+															>
+																Click to Delete {/* Visible delete text */}
+															</span>
+														</div>
+													))
+													: <div className={classes.imgWrap}>
+														<img
+															src={Ellipse1Image}
+															alt='avatar'
+															height={'100%'}
+															style={{ maxWidth: '100%', display: 'block', margin: '0 auto' }}
+														/>
+													</div>
+													// : <div className={classes.imgWrap}>
+													// 	<Avatar
+													// 		alt={`${currentUser.firstName} ${currentUser.lastName}`}
+													// 		src={currentUser.profilePicture}
+													// 		sx={{ maxWidth: '100%', display: 'block', margin: '0 auto' }} // Set the image size to 200px by 200px
+													// 	/>
+													// </div>
+												}
+											</div>
+											{data && data.avatar && data.avatar.length == 0 && (
+												<Box display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+													<label
+														className={classes.uploadLabel}
+														style={{ cursor: 'pointer' }}
 													>
-														Click to Delete {/* Visible delete text */}
-													</span>
-												</div>
-											))
-											: null}
-									</div>
-									<label
-										className={classes.uploadLabel}
-										style={{ cursor: 'pointer' }}
-									>
-										{'Upload an image'}
-										<input
-											style={{ display: 'none' }}
-											accept='image/*'
-											type='file'
-											ref={fileInput}
-											onChange={handleFile}
-										/>
-									</label>
-									<Typography size={'sm'} style={{ width: 220, position: 'center', marginBottom: 35 }}>
-										.PNG, .JPG, .JPEG
-									</Typography>
+														{'Upload a new image'}
+														<input
+															style={{ display: 'none' }}
+															accept='image/*'
+															type='file'
+															ref={fileInput}
+															onChange={handleFile}
+														/>
+													</label>
+													<Typography size={'sm'} style={{ width: 'max-content', position: 'center', marginBottom: 35 }}>
+														.PNG, .JPG, .JPEG
+													</Typography>
+												</Box>)}
+										</Box>
 
+										<Box display={'flex'} flexDirection={'column'} justifyContent={'left'} alignItems={'center'} style={{ marginLeft: 10 }}>
+											<FormControl variant='outlined' style={{ marginBottom: 5, flex: 1 }}>
+												<InputLabel id='demo-simple-select-outlined-label'>
+													Pronouns
+												</InputLabel>
+												<Select
+													labelId='demo-simple-select-outlined-label'
+													label='Pronouns'
+													id='demo-simple-select-outlined'
+													defaultValue='He/Him/His'
+													value={data?.pronouns || ''}
+													name='pronouns'
+													onChange={handleChange}
+													style={{ marginBottom: 5, width: 250 }}
+												>
+													<MenuItem value={'He/Him/His'}>He/Him/His</MenuItem>
+													<MenuItem value={'She/Her/Hers'}>She/Her/Hers</MenuItem>
+													<MenuItem value={'They/Them/Theirs'}>They/Them/Theirs</MenuItem>
+													<MenuItem value={'custom'}>
+														My pronouns are not listed. I use...
+													</MenuItem>
+												</Select>
+												{data?.pronouns === 'custom' && (
+													<TextField
+														label='Custom Pronouns'
+														variant='outlined'
+														defaultValue={''}
+														value={customPronouns}
+														name='customPronouns'
+														onChange={(e) => setCustomPronouns(e.target.value)}
+													/>
+												)}
+											</FormControl>
+											{
+												<FormControl variant='outlined' style={{ marginBottom: 35, flex: 1, marginTop: 10 }}>
+													<InputLabel id='demo-simple-select-outlined-label'>Role</InputLabel>
+													<Select
+														labelId='demo-simple-select-outlined-label'
+														label='Role'
+														id='demo-simple-select-outlined'
+														defaultValue='user'
+														value={data?.role || 'user'}
+														name='role'
+														style={{ marginBottom: 10, width: 250 }}
+														onChange={handleChange}
+													>
+														{isAdmin && <MenuItem value={'admin'}>Admin</MenuItem>}
+														<MenuItem value={'user'}>User</MenuItem>
+													</Select>
+												</FormControl>
+											}
+										</Box>
+									</Box>
 
+									{isMissingFirstName && (
+										<Typography
+											size={'sm'}
+											style={{ width: 220, position: 'center', color: 'red' }}
+										>
+											Please enter your first name.
+										</Typography>
+									)}
 									<TextField
 										label='Name'
 										variant='outlined'
@@ -304,8 +405,16 @@ const EditUser = () => {
 										value={data?.firstName || ''}
 										name='firstName'
 										onChange={handleChange}
-										style={{ marginBottom: 35 }}
+										style={{ marginBottom: 10 }}
 									/>
+									{isMissingLastName && (
+										<Typography
+											size={'sm'}
+											style={{ width: 220, position: 'center', color: 'red' }}
+										>
+											Please enter your last name.
+										</Typography>
+									)}
 									<TextField
 										label='Last Name'
 										variant='outlined'
@@ -318,7 +427,7 @@ const EditUser = () => {
 									<TextField
 										label='Phone'
 										variant='outlined'
-										style={{ marginBottom: 35 }}
+										style={{ marginBottom: 10 }}
 										defaultValue={''}
 										value={data?.phone || ''}
 
@@ -336,26 +445,41 @@ const EditUser = () => {
 										onChange={handleChange}
 										disabled
 									/>
-									<FormControl variant='outlined' style={{ marginBottom: 35 }}>
-										<InputLabel id='demo-simple-select-outlined-label'>
-											Role
-										</InputLabel>
-										<Select
-											labelId='demo-simple-select-outlined-label'
-											label='Role'
-											id='demo-simple-select-outlined'
-											defaultValue='user'
-											value={data?.role || 'user'}
-											name='role'
-											onChange={handleChange}
+
+									{/* {isMissingBiography && (
+										<Typography
+											size={'sm'}
+											style={{ width: 220, position: 'center', color: 'red' }}
 										>
-											{isAdmin &&
-												<MenuItem value={'admin'}>Admin</MenuItem>}
-											<MenuItem value={'user'}>User</MenuItem>
-										</Select>
-									</FormControl>
+											Please enter a short bio (256 characters).
+										</Typography>
+									)} */}
+									<Box display={'flex'} flexDirection={'column'} justifyContent={'left'} alignItems={'center'} style={{ marginBottom: 5 }}>
+										<TextField
+											label='Biography'
+											variant='outlined'
+											style={{ marginBottom: 10, width: '100%' }}
+											defaultValue={''}
+											value={data?.biography || ''}
+											name='biography'
+											//onChange={handleBiographyChange}
+											inputProps={{ maxLength: 256 }}
+											multiline
+											rows={4}
+										/>
+										{/* <Typography
+											size={'sm'}
+											style={{
+												width: 220,
+												position: 'center',
+												color: data.biography.length > 200 ? 'red' : 'black',
+											}}
+										>
+											{256 - data.biography.length} characters left
+										</Typography> */}
+									</Box>
 								</>
-							) : tab === 1 ? (
+							) : !isGoogleUser && tab === 1 ? (
 								<>
 									<Typography
 										variant={'h5'}

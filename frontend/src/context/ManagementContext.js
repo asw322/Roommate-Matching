@@ -277,8 +277,8 @@ const actions = {
         type: 'USERS_FORM_UPDATE_SUCCESS',
         payload: values
       });
-
-      history.push('/admin/dashboard')
+	  showSnackbar({ type: 'success', message: 'User Edited' });
+      history.push('/user/home') //where to go after clicking save on user profile
     } catch (error) {
       console.log(error)
 

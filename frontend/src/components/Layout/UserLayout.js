@@ -22,30 +22,18 @@ import Footer from '../Footer/Footer'
 import { Link } from '../Wrappers/Wrappers'
 import ColorChangeThemePopper from './components/ColorChangeThemePopper'
 
-import EditUser from '../../pages/user/EditUser';
-import Login from "../../pages/login/Login";
+
 
 // pages
 import BreadCrumbs from '../BreadCrumbs'
+import UserDashboard from '../../pages/UserDashboard/UserDashboard';
+import EditUser from '../../pages/EditUser/EditUser';
+import ViewUserProfile from '../../pages/ViewUserProfile/ViewUserProfile';
+import Login from "../../pages/login/Login";
 
 // context
 import { useLayoutState } from '../../context/LayoutContext'
-import UserDashboard from 'pages/UserDashboard/UserDashboard';
 
-// import UsersFormPage from 'pages/CRUD/Users/form/UsersFormPage';
-// import UsersTablePage from 'pages/CRUD/Users/table/UsersTablePage';
-
-// import LocationpreferenceFormPage from 'pages/CRUD/Locationpreference/form/LocationpreferenceFormPage';
-// import LocationpreferenceTablePage from 'pages/CRUD/Locationpreference/table/LocationpreferenceTablePage';
-
-// import UsersurveyFormPage from 'pages/CRUD/Usersurvey/form/UsersurveyFormPage';
-// import UsersurveyTablePage from 'pages/CRUD/Usersurvey/table/UsersurveyTablePage';
-
-// import UserpreferenceFormPage from 'pages/CRUD/Userpreference/form/UserpreferenceFormPage';
-// import UserpreferenceTablePage from 'pages/CRUD/Userpreference/table/UserpreferenceTablePage';
-
-// import UserquestionweightFormPage from 'pages/CRUD/Userquestionweight/form/UserquestionweightFormPage';
-// import UserquestionweightTablePage from 'pages/CRUD/Userquestionweight/table/UserquestionweightTablePage';
 
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url))
@@ -79,8 +67,9 @@ function Layout(props) {
                 <Switch>
 					<Route path="/user/home" component={UserDashboard} />
                     <Route path="/user/edit" component={EditUser} />
+					<Route path="/user/:id/profile" exact component={ViewUserProfile} /> 
                 </Switch>
-                <Fab
+				<Fab
                     color="primary"
                     aria-label="settings"
                     onClick={e => handleClick(e)}

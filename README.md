@@ -144,6 +144,10 @@ Then give that new user privileges to the new database then quit the `psql`.
 #### Start production build:
 `yarn start`
 
+#### Connect from WSL2 to Windows pgAdmin4:
+https://stackoverflow.com/questions/45707319/pgadmin-on-windows-10-with-postgres-when-installed-via-bash-on-ubuntu-on-windows
+https://chloesun.medium.com/set-up-postgresql-on-wsl2-and-connect-to-postgresql-with-pgadmin-on-windows-ca7f0b7f38ab
+
 ### Frontend:
 
 > Please change current folder: `cd frontend`
