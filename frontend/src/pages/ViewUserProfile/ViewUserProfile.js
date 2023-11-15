@@ -14,6 +14,7 @@ const ViewUserProfile = (props) => {
 	const managementValue = useManagementState();
 
 	const [currentUser, setCurrentUser] = useState(null);
+	//const [profileUser, setProfileUser] = useState(null); 
 
 	useEffect(() => {
 		setCurrentUser(managementValue.currentUser);
@@ -41,6 +42,8 @@ const ViewUserProfile = (props) => {
 	if (!userData) {
 		return <div>Loading...</div>;
 	}
+
+	console.log(userData);
 
 	return (
 		<Grid container spacing={3}>

@@ -13,6 +13,10 @@ import {
 } from '@mui/icons-material'
 import FolderIcon from '@mui/icons-material/Folder';
 import EditIcon from '@mui/icons-material/Edit';
+import UserDemographics from '@mui/icons-material/PeopleAlt';
+import UserLifestyleIcon from '@mui/icons-material/LocalBar';
+import UserHabitsIcon from '@mui/icons-material/SmokingRooms';
+import UserPersonalityIcon from '@mui/icons-material/Person';
 
 // styles
 import useStyles from "./styles";
@@ -119,13 +123,48 @@ function Sidebar({ location, structure }) {
 					toggleDrawer={toggleDrawer(true)}
 				/>
 				<SidebarLink
-					label='Edit User'
+					label='Edit Profile'
 					link={`/user/edit`}
 					location={location}
 					isSidebarOpened={isSidebarOpenedWrapper}
 					icon={<EditIcon />}
 					toggleDrawer={toggleDrawer(true)}
 				/>
+				<SidebarLink
+						label="Survey"
+						link="/user/:id/survey"
+						location={location}
+						isSidebarOpened={isSidebarOpenedWrapper}
+						icon={<FolderIcon />}
+						toggleDrawer={toggleDrawer(true)}
+						children={[
+							{
+								label: "Demographics",
+								link: "/user/survey/demographics",
+								icon: <UserDemographics />,
+							},
+							// {
+							// 	label: "Location Preference",
+							// 	link: "/admin/locationpreference",
+							// },
+							// {
+							// 	label: "User Survey",
+							// 	link: "/admin/usersurvey",
+							// },
+							// {
+							// 	label: "User Preference",
+							// 	link: "/admin/userpreference",
+							// },
+							// {
+							// 	label: "User Question Weight",
+							// 	link: "/admin/userquestionweight",
+							// },
+							// {
+							// 	label: "User Selections",
+							// 	link: "/admin/usersurvey",
+							// },
+						]}
+					/>
 				{isAdmin &&
 					<SidebarLink
 						label="Admin Dashboard"

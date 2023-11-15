@@ -52,7 +52,7 @@ const Redirect = (props) => {
   return <span>Redirecting...</span>;
 }
 
-function Layout(props) {
+function AdminLayout(props) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -184,4 +184,4 @@ function Layout(props) {
     )
 }
 
-export default withRouter(connect()(Layout))
+export default withRouter(connect()(AdminLayout))

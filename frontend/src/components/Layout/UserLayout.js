@@ -29,6 +29,8 @@ import BreadCrumbs from '../BreadCrumbs'
 import UserDashboard from '../../pages/UserDashboard/UserDashboard';
 import EditUser from '../../pages/EditUser/EditUser';
 import ViewUserProfile from '../../pages/ViewUserProfile/ViewUserProfile';
+import UserSurveyPage from '../../pages/UserSurvey/UserSurveyPage';
+import UserSurveyDemographicsPage from '../../pages/UserSurvey/demographics/UserDemographicsSurveyPage';
 import Login from "../../pages/login/Login";
 
 // context
@@ -40,7 +42,7 @@ const Redirect = (props) => {
   return <span>Redirecting...</span>;
 }
 
-function Layout(props) {
+function UserLayout(props) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -68,6 +70,9 @@ function Layout(props) {
 					<Route path="/user/home" component={UserDashboard} />
                     <Route path="/user/edit" component={EditUser} />
 					<Route path="/user/:id/profile" exact component={ViewUserProfile} /> 
+					<Route path={"/user/survey"} exact component={UserSurveyPage} />
+					<Route path={"/user/survey/demographics"} exact component={UserSurveyDemographicsPage} />
+                    {/* <Route path={"/admin/userpreference/:id/edit"} exact component={UserpreferenceFormPage} /> */}
                 </Switch>
 				<Fab
                     color="primary"
@@ -145,4 +150,4 @@ function Layout(props) {
     )
 }
 
-export default withRouter(connect()(Layout))
+export default withRouter(connect()(UserLayout))
