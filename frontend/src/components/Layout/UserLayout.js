@@ -72,6 +72,7 @@ function UserLayout(props) {
 					<Route path="/user/:id/profile" exact component={ViewUserProfile} /> 
 					<Route path={"/user/survey"} exact component={UserSurveyPage} />
 					<Route path={"/user/survey/demographics"} exact component={UserSurveyDemographicsPage} />
+					<Route path={"/user/survey/:id/demographics"} exact component={UserSurveyDemographicsPage} />
                     {/* <Route path={"/admin/userpreference/:id/edit"} exact component={UserpreferenceFormPage} /> */}
                 </Switch>
 				<Fab

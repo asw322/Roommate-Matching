@@ -23,7 +23,7 @@ const UserDemographicsSurveyPage = (props) => {
 	};
 
 	const isProfile = () => {
-		return match.url === '/app/profile';
+		return match.url === '/user/survey/demographics';
 	};
 
 	const doSubmit = (id, data) => {
@@ -39,9 +39,8 @@ const UserDemographicsSurveyPage = (props) => {
 			dispatch(actions.doFind(match.params.id));
 		} else {
 			if (isProfile()) {
-				const currentUser = JSON.parse(localStorage.getItem('user'));
-				const currentUserId = currentUser.user.id;
-				dispatch(actions.doFind(currentUserId));
+				const user = JSON.parse(localStorage.getItem('user'));
+				dispatch(actions.doEmailFind(user.email));
 			} else {
 				dispatch(actions.doNew())
 			}
