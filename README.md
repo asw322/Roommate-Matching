@@ -83,7 +83,7 @@
 > Please change current folder: `cd backend`
 
 #### Install local dependencies:
-`yarn install`
+`yarn install` --> [https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable]
 
   ------------
 
@@ -105,7 +105,14 @@ Ubuntu:
 ##### 2. Create db and admin user:
 Before run and test connection, make sure you have created a database as described in the above configuration. You can use the `psql` command to create a user and database.
 
-`psql postgres --u postgres`
+###### **DO THIS FIRST** 
+[https://stackoverflow.com/questions/69676009/psql-error-connection-to-server-on-socket-var-run-postgresql-s-pgsql-5432]
+admin admin and postgres to trust as well!!!
+sudo service postgresql restart
+
+```
+psql postgres --u postgres
+```
 
 Next, type this command for creating a new user with password then give access for creating the database.
 
@@ -121,7 +128,7 @@ Quit `psql` then log in again using the new user that previously created.
 
 Type this command to creating a new database.
 
-`postgres=> CREATE DATABASE db_{your_project_name};`
+`postgres=> CREATE DATABASE db_{your_project_name};` --> please check "src/db/db.config.js"
 
 Then give that new user privileges to the new database then quit the `psql`.
 
@@ -137,18 +144,26 @@ Then give that new user privileges to the new database then quit the `psql`.
 #### Start production build:
 `yarn start`
 
+#### Connect from WSL2 to Windows pgAdmin4:
+https://stackoverflow.com/questions/45707319/pgadmin-on-windows-10-with-postgres-when-installed-via-bash-on-ubuntu-on-windows
+https://chloesun.medium.com/set-up-postgresql-on-wsl2-and-connect-to-postgresql-with-pgadmin-on-windows-ca7f0b7f38ab
+
 ### Frontend:
 
 > Please change current folder: `cd frontend`
 
   ### Quick Start
 
-  #### 1. Run `yarn install`
+  #### 1. Run `yarn install && yarn upgrade`
 
   This will install both run-time project dependencies and developer tools listed
   in [package.json](../project-files/package.json) file.
 
-  #### 2. Run `yarn start`
+
+  - If error: [yarn add babel-plugin-dynamic-import-node ](https://stackoverflow.com/questions/65608016/cannot-find-module-babel-helper-regex-require-stack)
+
+
+  #### 2. Run `export NODE_OPTIONS=--openssl-legacy-provider && yarn start` 
 
   Runs the app in the development mode.
 

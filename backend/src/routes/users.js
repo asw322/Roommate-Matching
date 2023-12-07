@@ -1,8 +1,9 @@
 const express = require('express');
-
+const { Client } = require('pg');
 const UsersService = require('../services/users');
 const UsersDBApi = require('../db/api/users');
 const wrapAsync = require('../helpers').wrapAsync;
+const dbConfig = require('../db/db.config.js');
 
 const router = express.Router();
 
@@ -75,14 +76,14 @@ const router = express.Router();
  */
 
 router.post('/', async (req, res) => {
-  await UsersService.create(
-    req.body.data,
-    req.currentUser,
-    true,
-    req.headers.referer,
-  );
-  const payload = true;
-  res.status(200).send(payload);
+	await UsersService.create(
+		req.body.data,
+		req.currentUser,
+		true,
+		req.headers.referer,
+	);
+	const payload = true;
+	res.status(200).send(payload);
 });
 
 /**
@@ -135,12 +136,12 @@ router.post('/', async (req, res) => {
  */
 
 router.put(
-  '/:id',
-  wrapAsync(async (req, res) => {
-    await UsersService.update(req.body.data, req.body.id, req.currentUser);
-    const payload = true;
-    res.status(200).send(payload);
-  }),
+	'/:id',
+	wrapAsync(async (req, res) => {
+		await UsersService.update(req.body.data, req.body.id, req.currentUser);
+		const payload = true;
+		res.status(200).send(payload);
+	}),
 );
 
 /**
@@ -177,12 +178,12 @@ router.put(
  */
 
 router.delete(
-  '/:id',
-  wrapAsync(async (req, res) => {
-    await UsersService.remove(req.params.id, req.currentUser);
-    const payload = true;
-    res.status(200).send(payload);
-  }),
+	'/:id',
+	wrapAsync(async (req, res) => {
+		await UsersService.remove(req.params.id, req.currentUser);
+		const payload = true;
+		res.status(200).send(payload);
+	}),
 );
 
 /**
@@ -212,21 +213,21 @@ router.delete(
  */
 
 router.get(
-  '/',
-  wrapAsync(async (req, res) => {
-    const payload = await UsersDBApi.findAll(req.query);
+	'/',
+	wrapAsync(async (req, res) => {
+		const payload = await UsersDBApi.findAll(req.query);
 
-    res.status(200).send(payload);
-  }),
+		res.status(200).send(payload);
+	}),
 );
 
 router.get('/autocomplete', async (req, res) => {
-  const payload = await UsersDBApi.findAllAutocomplete(
-    req.query.query,
-    req.query.limit,
-  );
+	const payload = await UsersDBApi.findAllAutocomplete(
+		req.query.query,
+		req.query.limit,
+	);
 
-  res.status(200).send(payload);
+	res.status(200).send(payload);
 });
 
 /**
@@ -263,14 +264,26 @@ router.get('/autocomplete', async (req, res) => {
  */
 
 router.get(
-  '/:id',
-  wrapAsync(async (req, res) => {
-    const payload = await UsersDBApi.findBy({ id: req.params.id });
+	'/:id',
+	wrapAsync(async (req, res) => {
+		const payload = await UsersDBApi.findBy({ id: req.params.id });
 
-    delete payload.password;
+		delete payload.password;
 
-    res.status(200).send(payload);
-  }),
+		res.status(200).send(payload);
+	}),
+);
+
+router.get(
+	'/:email/email',
+	wrapAsync(async (req, res) => {
+		const email = req.params.email;
+		console.log("\n"+email)
+		const payload = await UsersDBApi.findBy({ email: email });
+		console.log("\n"+payload)
+		delete payload.password;
+		res.status(200).send(payload);
+	}),
 );
 
 /**
@@ -306,14 +319,14 @@ router.get(
  *          description: Some server error
  */
 router.get('/calculate/:id', wrapAsync(async (req, res) => {
-  const payload = await UsersService.calculateMatchesBasedOnUserPreferences(req.params.id);
+	const payload = await UsersService.calculateMatchesBasedOnUserPreferences(req.params.id);
 
 
-  // check to make sure the payload exists
+	// check to make sure the payload exists
 
-  // store the payload data into <> table
+	// store the payload data into <> table
 
-  res.status(200).send(payload);
+	res.status(200).send(payload);
 }));
 
 router.use('/', require('../helpers').commonErrorHandler);

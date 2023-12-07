@@ -61,7 +61,7 @@ function Login(props) {
   let [error, setError] = useState(null);
   let [activeTabId, setActiveTabId] = useState(+tab ?? 0);
   let [nameValue, setNameValue] = useState("");
-  let [loginValue, setLoginValue] = useState("admin@flatlogic.com");
+  let [loginValue, setLoginValue] = useState("admin@flatlogic.com"); //set these to empty when ready and uncomment the lines from tab2
   let [passwordValue, setPasswordValue] = useState("password");
   let [forgotEmail, setForgotEmail] = useState("");
   let [isForgot, setIsForgot] = useState(false);
@@ -86,7 +86,7 @@ function Login(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <img src={logo} alt="logo" className={classes.logotypeImage} />
+        <img src={logo} alt="logo" className={classes.logotypeImage}/>
         <Typography className={classes.logotypeText}>Roommate Matching</Typography>
       </div>
       <div className={!isForgot ? classes.formContainer : classes.customFormContainer}>
@@ -152,7 +152,7 @@ function Login(props) {
               </Tabs>
               {activeTabId === 0 && (
                 <React.Fragment>
-                  {config.isBackend ? (
+                  {/* {config.isBackend ? (
                     <Widget
                       disableWidgetMenu
                       inheritHeight
@@ -170,9 +170,9 @@ function Login(props) {
                         to login!
                       </Typography>
                     </Widget>
-                  ) : null}
-                  <Typography variant="h1" className={classes.greeting}>
-                    {getGreeting()}, User
+                  ) : null} */}
+                  <Typography variant="h2" className={classes.greeting}>
+                    Welcome! Please login to your Account.
                   </Typography>
                   <Button
                     size="large"
@@ -294,7 +294,7 @@ function Login(props) {
                         input: classes.Input
                       }
                     }}
-                    value={nameValue}
+                    //value={nameValue}
                     onChange={e => setNameValue(e.target.value)}
                     margin="normal"
                     placeholder="Full Name"
@@ -309,7 +309,7 @@ function Login(props) {
                         input: classes.Input
                       }
                     }}
-                    value={loginValue}
+                    //value={loginValue}
                     onChange={e => setLoginValue(e.target.value)}
                     margin="normal"
                     placeholder="Email Adress"
@@ -324,7 +324,7 @@ function Login(props) {
                         input: classes.Input
                       }
                     }}
-                    value={passwordValue}
+                    //value={passwordValue}
                     onChange={e => setPasswordValue(e.target.value)}
                     margin="normal"
                     placeholder="Password"
