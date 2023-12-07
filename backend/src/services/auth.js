@@ -11,7 +11,7 @@ const helpers = require('../helpers');
 class Auth {
   static async signup(email, password, options = {}, host) {
     const user = await UsersDBApi.findBy({email});
-
+	console.log(user);
     const hashedPassword = await bcrypt.hash(
       password,
       config.bcrypt.saltRounds,
