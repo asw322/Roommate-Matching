@@ -83,19 +83,11 @@ const UsersForm = (props) => {
       </Grid>
 
       <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
-      </Grid>
-
-      <Grid item>
         <InputFormItem
           name={'lastName'}
           schema={usersFields}
 
         />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
       </Grid>
 
       <Grid item>
@@ -107,19 +99,11 @@ const UsersForm = (props) => {
       </Grid>
 
       <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
-      </Grid>
-
-      <Grid item>
         <InputFormItem
           name={'email'}
           schema={usersFields}
 
         />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
       </Grid>
 
       <Grid item>
@@ -130,18 +114,10 @@ const UsersForm = (props) => {
       </Grid>
 
       <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
-      </Grid>
-
-      <Grid item>
         <SwitchFormItem
           name={'disabled'}
           schema={usersFields}
         />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
       </Grid>
 
       <Grid item>
@@ -157,9 +133,6 @@ const UsersForm = (props) => {
         />
       </Grid>
 
-      <Grid item>
-        <InputFormItem name={'password'} schema={usersFields} />
-      </Grid>
 
     <Grid item>
       <InputFormItem
